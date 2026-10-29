@@ -21,6 +21,8 @@ jobs:
           curl -fL --retry 3 'https://github.com/jschneider-png/Lernwerkstatt-App-Test-2/archive/refs/heads/main.zip' -o /tmp/lernwerkstatt.zip
           unzip -q /tmp/lernwerkstatt.zip -d /tmp
           cp -a /tmp/Lernwerkstatt-App-Test-2-main/. .
+          # Workflow-Dateien dürfen vom GitHub-Actions-Token nicht neu gepusht werden.
+          rm -f .github/workflows/static.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
