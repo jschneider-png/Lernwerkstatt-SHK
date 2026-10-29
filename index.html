@@ -8,7 +8,8 @@
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#e6f1f9;font-family:system-ui,sans-serif;overflow-x:hidden}
 .screen{width:100%;max-width:1024px;margin:0 auto;position:relative;line-height:0;min-height:100vh;min-height:100dvh;background:linear-gradient(to bottom,#fff 0%,#edf6fc 72%,#d5e9f7 100%)}
-.screen>img{width:100%;height:auto;display:block}
+.artwork{position:relative;width:100%;line-height:0}
+.artwork>img{width:100%;height:auto;display:block}
 .hit{position:absolute;display:block;border-radius:12px;z-index:2;outline-offset:3px;-webkit-tap-highlight-color:rgba(255,255,255,.15)}
 .hit:focus-visible{outline:4px solid #0b5597}
 .class11{left:51.2%;top:39.9%;width:45.8%;height:17.7%;background:transparent;border:0}
@@ -19,10 +20,12 @@
 @media(min-width:1025px){.screen{box-shadow:0 12px 48px #0d365024}}
 </style></head><body>
 <main class="screen" id="start">
-<img src="startseite-vorlage.png?v=20261029c" alt="Lernwerkstatt Fachbereich Metall: Klassen 10, 11, 12, 13 und allgemeine Informationen. Klassen 11 Sanitärtechnik und 12 Heizungstechnik sind aktiv." fetchpriority="high">
+<div class="artwork">
+<img src="startseite-vorlage.png?v=20261029buttons" alt="Lernwerkstatt Fachbereich Metall: Klassen 10, 11, 12, 13 und allgemeine Informationen. Klassen 11 Sanitärtechnik und 12 Heizungstechnik sind aktiv." fetchpriority="high">
 <a class="hit class11" href="klasse11.html" aria-label="Klasse 11: digitales Klassenzimmer Sanitärtechnik öffnen"><span class="sr-only">Klasse 11 Sanitärtechnik öffnen</span></a>
 <a class="hit class12" href="klasse12/index.html" aria-label="Klasse 12: digitales Klassenzimmer Heizungstechnik öffnen"><span class="sr-only">Klasse 12 öffnen</span></a>
 <a class="hit home" href="#start" aria-label="Zur Startseite"><span class="sr-only">Startseite</span></a>
+</div>
 </main>
 <!-- Bestehendes Klassenzimmer Klasse 11 unverändert unter klasse11.html; die alten Lernpfade und Materialien bleiben im Projekt. -->
 <!-- Die frühere mobile Navigation bleibt im gesicherten Klasse-11-Code und kann bei Bedarf reaktiviert werden. -->
