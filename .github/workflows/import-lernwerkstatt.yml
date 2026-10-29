@@ -1,0 +1,30 @@
+name: Einmaliger Import der Lernwerkstatt
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/import-lernwerkstatt.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ziel-Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Vollständige Testversion einschließlich Bilder und Lerninhalte übernehmen
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 'https://github.com/jschneider-png/Lernwerkstatt-App-Test-2/archive/refs/heads/main.zip' -o /tmp/lernwerkstatt.zip
+          unzip -q /tmp/lernwerkstatt.zip -d /tmp
+          cp -a /tmp/Lernwerkstatt-App-Test-2-main/. .
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'Lernwerkstatt SHK: Startseite, Klasse 11 und sämtliche Materialien importieren'
+            git push
+          fi
