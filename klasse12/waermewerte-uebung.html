@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Übung macht den Meister · Wärmewerte</title>
+<style>
+:root{--navy:#123e5a;--blue:#176f9b;--soft:#eef7fb;--line:#c7dce7;--text:#1d3949;--muted:#5f7684;--ok:#1d6b43;--bad:#8b4a18}
+*{box-sizing:border-box}body{margin:0;font-family:Verdana,Arial,sans-serif;background:#f5f9fb;color:var(--text);font-size:15px}
+header{background:linear-gradient(100deg,#123e5a,#176f9b);color:#fff;padding:20px 16px}
+.wrap{width:min(1050px,94vw);margin:auto}.back{color:#dff4ff;text-decoration:none;font-weight:700}
+h1{margin:9px 0 4px;font-size:1.65rem}.sub{margin:0;color:#d6edf8}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.legend span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 11px;font-size:.86rem}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.level{border:1px solid var(--line);border-radius:14px;background:#fff;padding:15px;cursor:pointer;text-align:left;font:inherit}
+.level:hover,.level:focus-visible,.level.active{outline:none;background:#eaf6fc;border-color:#78b8d5}.level strong{display:block;color:var(--navy);font-size:1.05rem;margin:3px 0}.level small{color:var(--muted);line-height:1.4}
+.panel{display:none;margin:18px 0 30px}.panel.active{display:block}.task{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}.task h2{font-size:1rem;margin:0 0 7px;color:var(--navy)}.task p{margin:5px 0;color:var(--muted);line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}.field{display:grid;gap:5px}.field label{font-weight:700;font-size:.84rem;color:#315a70}
+input,textarea{width:100%;padding:10px;border:1px solid #b7ccd7;border-radius:8px;font:inherit;background:#fbfdfe}input:focus,textarea:focus{outline:2px solid #8fd0ea;outline-offset:1px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.btn{border:0;border-radius:8px;padding:9px 12px;font:inherit;font-weight:700;cursor:pointer}.check{background:var(--blue);color:#fff}.help{background:#e7f2f7;color:#244e66}.sample{background:#edf0f2;color:#425866}
+.feedback,.solution{display:none;margin-top:9px;padding:10px;border-radius:8px;font-size:.88rem;line-height:1.5}.feedback.show,.solution.show{display:block}.feedback.ok{background:#edf8f1;color:var(--ok);border:1px solid #b8dec6}.feedback.bad{background:#fff5e9;color:var(--bad);border:1px solid #ebd0aa}.solution{background:#edf7fb;border-left:4px solid #479cc2;color:#36596d}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}th,td{border:1px solid #cbdbe4;padding:7px}th{background:#eef5f9;color:#315a70}td input{min-width:80px}
+.note{background:#fff8e9;border:1px solid #ead6a5;border-radius:10px;padding:10px 12px;color:#6a552b;margin-top:12px;font-size:.86rem}
+@media(max-width:720px){.levels,.grid{grid-template-columns:1fr}body{font-size:14px}}
+
+.challenge-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.challenge-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.challenge-card strong{display:block;color:var(--navy);margin-bottom:4px}.challenge-card span{font-size:.82rem;color:var(--muted);line-height:1.4}
+.thinking{border-left:5px solid #e89b2b;background:linear-gradient(90deg,#fff8e8,#fff)}
+.badge-row{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.mini-badge{display:inline-flex;padding:5px 8px;border-radius:999px;background:#edf5f9;color:#315a70;font-size:.76rem;font-weight:700}
+.quiz{margin:24px 0 36px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.quiz h2{margin:0 0 8px;color:var(--navy)}.quiz-q{padding:12px 0;border-top:1px solid #e3edf2}.quiz-q:first-of-type{border-top:0}.quiz-q p{font-weight:700;margin:0 0 8px}
+.quiz-q label{display:block;margin:6px 0;color:#405c6c}.quiz-result{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#eef7fb;color:#315a70;font-weight:700}.quiz-result.show{display:block}
+.h5p-slot{margin:18px 0;padding:14px;border:1px dashed #9fc6d8;border-radius:12px;background:#f7fbfd;color:#567180}
+@media(max-width:720px){.challenge-strip{grid-template-columns:1fr}}
+
+.input-wrap{display:grid;gap:4px}
+.field-status{display:none;font-size:.76rem;line-height:1.35;padding:5px 7px;border-radius:7px}
+.field-status.show{display:block}
+.field-status.ok{background:#edf8f1;color:#1d6b43;border:1px solid #b8dec6}
+.field-status.bad{background:#fff4ec;color:#8a4a1b;border:1px solid #ebc8aa}
+.field-status.tip{background:#eef6fb;color:#315a70;border:1px solid #c5dce8}
+input.is-correct{background:#f0faf3;border-color:#76b98f;box-shadow:0 0 0 2px rgba(72,155,103,.10)}
+input.is-wrong{background:#fff8f2;border-color:#d99b6b;box-shadow:0 0 0 2px rgba(197,111,47,.08)}
+
+.help-ladder{margin:10px 0 2px;padding:9px 10px;border:1px solid #d4e3ea;border-radius:10px;background:#f8fbfd}
+.help-ladder-title{font-size:.75rem;font-weight:800;color:#4f6c7c;margin-bottom:7px}
+.help-ladder-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.help-step{position:relative;padding:7px 8px;border-radius:8px;background:#eef3f6;color:#667d89;font-size:.74rem;font-weight:700;text-align:center;border:1px solid #d8e3e9;transition:.15s}
+.help-step.active{background:#fff1d8;color:#8a5718;border-color:#e8c57d}
+.help-step.done{background:#edf8f1;color:#1d6b43;border-color:#b8dec6}
+.help-step .num{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#fff;margin-right:4px;font-size:.7rem}
+@media(max-width:620px){.help-ladder-steps{grid-template-columns:1fr}.help-step{text-align:left}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="back" href="lernpfad.html?bw=2">← zurück zu BW2</a><h1>🌶️ Übung macht den Meister · Wärmewerte</h1><p class="sub">Wähle dein Niveau, rechne selbst und prüfe deine Ergebnisse.</p></div></header>
+<main class="wrap">
+<div class="legend"><span>🌶️ leicht · Grundlagen festigen</span><span>🌶️🌶️ mittel · anwenden und umstellen</span><span>🌶️🌶️🌶️ schwer · transferieren und vergleichen</span></div>
+<div class="levels">
+<button class="level active" data-level="easy"><div>🌶️</div><strong>Leicht</strong><small>Tabellenwerte, Heizwert/Brennwert und einfache Wärmemengen.</small></button>
+<button class="level" data-level="mid"><div>🌶️🌶️</div><strong>Mittel</strong><small>Mehrere Brennstoffe, Gasverbrauch und Heizleistung.</small></button>
+<button class="level" data-level="hard"><div>🌶️🌶️🌶️</div><strong>Schwer</strong><small>Dichte, Stoffumrechnung, Energie- und Kostenvergleich.</small></button>
+</div>
+<div class="challenge-strip">
+  <div class="challenge-card"><strong>🧩 Denkaufgabe</strong><span>Nicht nur rechnen: Fehler erkennen, passende Formel auswählen und Ergebnisse beurteilen.</span></div>
+  <div class="challenge-card"><strong>🪜 Hilfestufen</strong><span>Du entscheidest selbst, ob du nur einen Denkanstoß, eine Formel oder einen Rechenschritt brauchst.</span></div>
+  <div class="challenge-card"><strong>🎯 Selbstcheck</strong><span>Am Ende zeigt ein kurzer Test, ob die wichtigsten Zusammenhänge wirklich sitzen.</span></div>
+</div>
+
+<section class="panel active" data-panel="easy">
+<div class="note"><strong>Arbeitsweise:</strong> Rechne zuerst selbst. Bei Fehlern bekommst du schrittweise Hilfe. Die vollständige Lösung erscheint erst bei richtiger Eingabe.</div>
+<div class="task" data-id="e1"><h2>1 · Tabellenwerte ergänzen</h2><p>Trage die Werte aus Fach- oder Tabellenbuch ein.</p>
+<table><tr><th>Brennstoff</th><th>Heizwert Hᵢ</th><th>Brennwert Hₛ</th></tr>
+<tr><td>Steinkohle</td><td><input data-a="8.06" data-t=".03" data-unit="kWh/kg" aria-label="Steinkohle Heizwert"></td><td><input data-a="8.10" data-t=".03" data-unit="kWh/kg" aria-label="Steinkohle Brennwert"></td></tr>
+<tr><td>Heizöl EL</td><td><input data-a="11.83" data-t=".04" data-unit="kWh/kg" aria-label="Heizöl Heizwert"></td><td><input data-a="12.60" data-t=".04" data-unit="kWh/kg" aria-label="Heizöl Brennwert"></td></tr>
+<tr><td>Erdgas LL</td><td><input data-a="9.03" data-t=".04" data-unit="kWh/m³" aria-label="Erdgas LL Heizwert"></td><td><input data-a="10.02" data-t=".04" data-unit="kWh/m³" aria-label="Erdgas LL Brennwert"></td></tr>
+<tr><td>Erdgas E</td><td><input data-a="10.03" data-t=".04" data-unit="kWh/m³" aria-label="Erdgas E Heizwert"></td><td><input data-a="11.13" data-t=".04" data-unit="kWh/m³" aria-label="Erdgas E Brennwert"></td></tr></table>
+<div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Lösung:</strong> Steinkohle 8,06 / 8,10; Heizöl EL 11,83 / 12,60 kWh/kg; Erdgas LL 9,03 / 10,02; Erdgas E 10,03 / 11,13 kWh/m³.</div></div>
+
+<div class="task" data-id="e2"><h2>2 · Wärmemenge aus 15 kg Koks</h2><p>Hᵢ = 8,06 kWh/kg. Berechne Q.</p><div class="field"><label>Q in kWh</label><input data-a="120.9" data-t=".15" data-unit="kWh"></div><div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> Q = m · Hᵢ = 15 kg · 8,06 kWh/kg = <strong>120,9 kWh</strong>.</div></div>
+
+<div class="task" data-id="e3"><h2>3 · 20 kg Heizöl EL mit Kondensationswärme</h2><p>Hₛ = 12,60 kWh/kg. Berechne Q.</p><div class="field"><label>Q in kWh</label><input data-a="252" data-t=".2" data-unit="kWh"></div><div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> Q = m · Hₛ = 20 kg · 12,60 kWh/kg = <strong>252 kWh</strong>.</div></div>
+
+<div class="task"><h2>4 · Fachbegriffe erklären</h2><p>Erkläre den Unterschied zwischen Heizwert und Brennwert und nenne drei Holzbrennstoffe.</p><textarea rows="4" placeholder="Deine Antwort …"></textarea><div class="actions"><button class="btn sample">Musterantwort vergleichen</button></div><div class="solution"><strong>Muster:</strong> Der Brennwert berücksichtigt zusätzlich die Kondensationswärme des Wasserdampfs; der Heizwert nicht. Beispiele: Pellets, Scheitholz, Hackschnitzel.</div></div>
+
+<div class="task thinking">
+  <div class="badge-row"><span class="mini-badge">🧩 Denkaufgabe</span><span class="mini-badge">Fehler finden</span></div>
+  <h2>5 · Stimmt das Ergebnis?</h2>
+  <p>Ein Schüler berechnet für 20 kg Heizöl EL mit Hₛ = 12,60 kWh/kg nur 25,2 kWh. Erkläre, wo der Fehler liegt und wie das Ergebnis plausibel geprüft werden kann.</p>
+  <textarea rows="3" placeholder="Deine Erklärung …"></textarea>
+  <div class="actions"><button class="btn sample">Musterantwort vergleichen</button></div>
+  <div class="solution"><strong>Muster:</strong> Das Ergebnis ist um den Faktor 10 zu klein. 20 · 12,60 ergibt 252 kWh. Eine Plausibilitätsprüfung hilft: 1 kg liefert bereits rund 12,6 kWh, also müssen 20 kg deutlich über 200 kWh ergeben.</div>
+</div>
+</section>
+
+<section class="panel" data-panel="mid">
+<div class="task" data-id="m1"><h2>1 · Wärmemengen bei vollständiger Verbrennung</h2><p>Nutze jeweils den Heizwert Hᵢ.</p><div class="grid">
+<div class="field"><label>a) 15 kg Holzpellets · Q in kWh</label><input data-a="73.5" data-t=".15" data-unit="kWh"></div>
+<div class="field"><label>b) 20 l Heizöl EL · Q in kWh</label><input data-a="200" data-t=".3" data-unit="kWh"></div>
+<div class="field"><label>c) 3 m³ Erdgas LL · Q in kWh</label><input data-a="27.09" data-t=".08" data-unit="kWh"></div></div>
+<div class="actions"><button class="btn check">Alle prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenwege:</strong> a) 15 · 4,9 = 73,5 kWh · b) 20 · 10 = 200 kWh · c) 3 · 9,03 = 27,09 kWh.</div></div>
+
+<div class="task" data-id="m2"><h2>2 · Erdgasverbrauch</h2><p>Q = 135 kWh, HₛB = 10,8 kWh/m³. Bestimme V.</p><div class="field"><label>V in m³</label><input data-a="12.5" data-t=".05" data-unit="m³"></div><div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> V = Q / HₛB = 135 / 10,8 = <strong>12,5 m³</strong>.</div></div>
+
+<div class="task" data-id="m3"><h2>3 · Speicher-Wassererwärmer</h2><p>120 l Wasser von 25 °C auf 60 °C in 12 min. c = 1,163 Wh/(kg·K).</p><div class="grid"><div class="field"><label>Q in kWh</label><input data-a="4.8846" data-t=".03" data-unit="kWh"></div><div class="field"><label>P in kW</label><input data-a="24.423" data-t=".08" data-unit="kW"></div></div><div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> ΔT = 35 K; Q = 120 · 35 · 1,163 Wh = 4884,6 Wh = 4,8846 kWh. 12 min = 0,2 h. P = 4,8846 / 0,2 = <strong>24,423 kW</strong>.</div></div>
+
+<div class="task thinking" data-id="m4">
+  <div class="badge-row"><span class="mini-badge">🧩 Denkaufgabe</span><span class="mini-badge">Formelwahl</span></div>
+  <h2>4 · Welche Formel passt?</h2>
+  <p>Ein Gebäude benötigt 180 kWh Wärme. Zur Verfügung steht Erdgas mit 10,8 kWh/m³. Entscheide zuerst, ob multipliziert oder dividiert werden muss, und begründe deine Wahl.</p>
+  <div class="field"><label>Benötigte Gasmenge in m³</label><input data-a="16.667" data-t=".08" data-unit="m³"></div>
+  <div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div>
+  <div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> Gesucht ist die Menge. Deshalb wird die Energie durch den Energieinhalt pro m³ geteilt: V = 180 / 10,8 ≈ <strong>16,67 m³</strong>.</div>
+</div>
+</section>
+
+<section class="panel" data-panel="hard">
+<div class="task" data-id="h1"><h2>1 · 20 l Heizöl EL mit Brennwert</h2><p>Hₛ = 12,60 kWh/kg, ρ = 860 kg/m³, 20 l = 0,020 m³.</p><div class="grid"><div class="field"><label>Masse m in kg</label><input data-a="17.2" data-t=".05" data-unit="kg"></div><div class="field"><label>Q in kWh</label><input data-a="216.72" data-t=".15" data-unit="kWh"></div></div><div class="actions"><button class="btn check">Prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> m = ρ · V = 860 · 0,020 = 17,2 kg. Q = 17,2 · 12,60 = <strong>216,72 kWh</strong>.</div></div>
+
+<div class="task" data-id="h2"><h2>2 · 250 l Heizöl EL: Energie, Erdgasmenge und Kosten</h2><p>Hᵢ,Öl = 10 kWh/l; HᵢB,Erdgas = 9,9 kWh/m³; Heizölpreis 0,95 €/l; Gaspreis 0,82 €/m³.</p><div class="grid">
+<div class="field"><label>a) Q in kWh</label><input data-a="2500" data-t="1" data-unit="kWh"></div>
+<div class="field"><label>a) Q in kJ</label><input data-a="9000000" data-t="3000" data-unit="kJ"></div>
+<div class="field"><label>b) Erdgas in m³</label><input data-a="252.5" data-t=".15" data-unit="m³"></div>
+<div class="field"><label>c) Heizölkosten in €</label><input data-a="237.5" data-t=".06" data-unit="€"></div>
+<div class="field"><label>c) Gaskosten in €</label><input data-a="207.05" data-t=".15" data-unit="€"></div>
+<div class="field"><label>Kostendifferenz in €</label><input data-a="30.45" data-t=".15" data-unit="€"></div></div>
+<div class="actions"><button class="btn check">Alle prüfen</button><button class="btn help">Hilfe</button></div><div class="feedback"></div><div class="solution"><strong>Rechenweg:</strong> Q = 250 · 10 = 2500 kWh = 9 000 000 kJ. V₍Gas₎ = 2500 / 9,9 ≈ 252,5 m³. Öl: 250 · 0,95 = 237,50 €. Gas: 252,5 · 0,82 ≈ 207,05 €. Differenz ≈ <strong>30,45 €</strong>.</div></div>
+
+<div class="task thinking">
+  <div class="badge-row"><span class="mini-badge">🧩 Denkaufgabe</span><span class="mini-badge">Transfer</span></div>
+  <h2>3 · Wirtschaftlich oder nur energetisch gleich?</h2>
+  <p>Zwei Brennstoffe liefern dieselbe Wärmemenge. Erkläre, warum daraus noch nicht automatisch folgt, dass beide gleich wirtschaftlich sind.</p>
+  <textarea rows="3" placeholder="Deine Begründung …"></textarea>
+  <div class="actions"><button class="btn sample">Musterantwort vergleichen</button></div>
+  <div class="solution"><strong>Muster:</strong> Gleiche Wärmemenge bedeutet nur gleiche Energiemenge. Für die Wirtschaftlichkeit spielen zusätzlich Brennstoffpreis, Anlagenwirkungsgrad, Lagerung, Wartung und weitere Betriebskosten eine Rolle.</div>
+</div>
+</section>
+
+<section class="quiz" id="wissenstest">
+  <h2>🎯 Wissenstest · Wärmewerte</h2>
+  <p>5 kurze Fragen. Ziel: mindestens 4 richtig.</p>
+  <div class="quiz-q" data-q="1"><p>1. Welcher Wert berücksichtigt zusätzlich die Kondensationswärme?</p><label><input type="radio" name="q1" value="a"> Heizwert Hᵢ</label><label><input type="radio" name="q1" value="b"> Brennwert Hₛ</label></div>
+  <div class="quiz-q" data-q="2"><p>2. Welche Formel passt für die Wärmemenge aus einer Masse Brennstoff?</p><label><input type="radio" name="q2" value="a"> Q = m · H</label><label><input type="radio" name="q2" value="b"> Q = H / m</label></div>
+  <div class="quiz-q" data-q="3"><p>3. Was passiert bei schlechterem Wirkungsgrad mit dem Brennstoffbedarf?</p><label><input type="radio" name="q3" value="a"> Er sinkt.</label><label><input type="radio" name="q3" value="b"> Er steigt.</label></div>
+  <div class="quiz-q" data-q="4"><p>4. 1 kWh entspricht …</p><label><input type="radio" name="q4" value="a"> 3600 kJ</label><label><input type="radio" name="q4" value="b"> 1000 kJ</label></div>
+  <div class="quiz-q" data-q="5"><p>5. Was ist eine sinnvolle Plausibilitätsprüfung?</p><label><input type="radio" name="q5" value="a"> Prüfen, ob Größenordnung und Einheit zum Ergebnis passen.</label><label><input type="radio" name="q5" value="b"> Nur das Endergebnis mit dem Taschenrechner erneut eintippen.</label></div>
+  <div class="actions"><button class="btn check" id="quizCheck" type="button">Wissenstest auswerten</button></div>
+  <div class="quiz-result" id="quizResult"></div>
+  <div class="h5p-slot"><strong>H5P-Platzhalter:</strong> Wenn du später einen H5P-Link oder Embed-Code hast, kann dieser Wissenstest hier 1:1 durch das H5P ersetzt oder ergänzt werden.</div>
+</section>
+</main>
+<script>
+const hints={
+e1:["Achte zuerst auf die richtige Einheit: kWh/kg oder kWh/m³.","Der Brennwert Hₛ liegt über dem Heizwert Hᵢ.","Prüfe jeden Tabellenwert einzeln und achte auf Dezimalstellen."],
+e2:["Gesucht ist Q; gegeben sind Masse und Heizwert.","Formel: Q = m · Hᵢ.","Setze 15 kg und 8,06 kWh/kg ein."],
+e3:["Weil Kondensationswärme berücksichtigt wird, brauchst du Hₛ.","Formel: Q = m · Hₛ.","Setze 20 kg und 12,60 kWh/kg ein."],
+m1:["Alle drei Teilaufgaben folgen demselben Grundprinzip.","Formel: Q = Menge · Heizwert.","Nutze 4,9 kWh/kg; 10 kWh/l; 9,03 kWh/m³."],
+m2:["Stelle Q = V · H nach V um.","Formel: V = Q / H.","Rechne 135 / 10,8."],
+m3:["Erst Wärmemenge, dann Leistung.","Q = m · c · ΔT; danach P = Q/t.","ΔT = 35 K und 12 min = 0,2 h."],
+h1:["Liter zuerst in m³ umrechnen.","m = ρ · V; danach Q = m · Hₛ.","20 l = 0,020 m³."],
+h2:["Arbeite schrittweise: Energie → kJ → Gasmenge → Kosten.","1 kWh = 3600 kJ; VGas = Q/HGas.","Kosten = Menge · Preis; danach Differenz bilden."],
+m4:["Überlege: Gesucht ist eine Menge, gegeben ist Energie pro m³.","Stelle Q = V · H nach V um.","V = Q/H = 180/10,8."]
+};
+const num=v=>Number(String(v).trim().replace(",",".").replace(/\s/g,""));
+document.querySelectorAll(".level").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".level").forEach(x=>x.classList.toggle("active",x===b));
+ document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===b.dataset.level));
+}));
+function ensureFieldStatus(input){
+ let s=input.nextElementSibling;
+ if(!s||!s.classList.contains("field-status")){
+   s=document.createElement("div");s.className="field-status";input.insertAdjacentElement("afterend",s);
+ }
+ return s;
+}
+function checkSingleField(input,{onBlur=false}={}){
+ const status=ensureFieldStatus(input);
+ const raw=String(input.value||"").trim();
+ const unit=input.dataset.unit||"";
+ input.classList.remove("is-correct","is-wrong");
+ if(!raw){
+   status.className="field-status show tip";
+   status.textContent=unit?"Eingabe erwartet · Einheit: "+unit:"Bitte einen Zahlenwert eingeben.";
+   return null;
+ }
+ const v=num(raw),a=Number(input.dataset.a),t=Number(input.dataset.t||0);
+ if(!Number.isFinite(v)){
+   input.classList.add("is-wrong");
+   status.className="field-status show bad";
+   status.textContent="Bitte nur eine Zahl eingeben"+(unit?" · Einheit: "+unit:"")+".";
+   return false;
+ }
+ const ok=Math.abs(v-a)<=t;
+ if(ok){
+   input.classList.add("is-correct");
+   status.className="field-status show ok";
+   status.textContent="✓ Richtig"+(unit?" · Einheit: "+unit:"")+".";
+ }else{
+   input.classList.add("is-wrong");
+   status.className="field-status show bad";
+   status.textContent=(onBlur?"Noch nicht passend. ":"Nicht richtig. ")+(unit?"Achte auf die Einheit "+unit+" und ":"")+"prüfe Ansatz, Dezimalstelle und Größenordnung.";
+ }
+ return ok;
+}
+document.querySelectorAll("input[data-a]").forEach(input=>{
+ input.addEventListener("focus",()=>{
+   const status=ensureFieldStatus(input);
+   if(!input.value.trim()){
+     status.className="field-status show tip";
+     status.textContent=(input.dataset.unit?"Erwartete Einheit: "+input.dataset.unit+". ":"")+"Dezimalpunkt oder Dezimalkomma ist möglich.";
+   }
+ });
+ input.addEventListener("blur",()=>checkSingleField(input,{onBlur:true}));
+});
+function ensureHelpLadder(task){
+ if(task.querySelector(".help-ladder"))return;
+ const actions=task.querySelector(".actions");
+ if(!actions)return;
+ const ladder=document.createElement("div");
+ ladder.className="help-ladder";
+ ladder.innerHTML='<div class="help-ladder-title">🪜 Deine Hilfe-Leiter</div><div class="help-ladder-steps"><div class="help-step" data-step="1"><span class="num">1</span>Denkanstoß</div><div class="help-step" data-step="2"><span class="num">2</span>Formel</div><div class="help-step" data-step="3"><span class="num">3</span>Rechenschritt</div></div>';
+ actions.insertAdjacentElement("beforebegin",ladder);
+}
+function updateHelpLadder(task,level,solved=false){
+ ensureHelpLadder(task);
+ task.querySelectorAll(".help-step").forEach(step=>{
+   const n=Number(step.dataset.step);
+   step.classList.toggle("active",!solved&&n===Math.min(Math.max(level,1),3));
+   step.classList.toggle("done",solved||n<level);
+ });
+}
+document.querySelectorAll(".task").forEach(task=>{
+ let tries=0;const fb=task.querySelector(".feedback"),sol=task.querySelector(".solution"),id=task.dataset.id||"";
+ ensureHelpLadder(task);
+ updateHelpLadder(task,1,false);
+ const check=task.querySelector(".check"),help=task.querySelector(".help"),sample=task.querySelector(".sample");
+ if(check)check.addEventListener("click",()=>{
+  const inputs=[...task.querySelectorAll("input[data-a]")];tries++;
+  const results=inputs.map(i=>checkSingleField(i));
+  const ok=inputs.length&&results.every(Boolean);
+  if(ok){fb.className="feedback show ok";fb.textContent="✓ Richtig. Vergleiche jetzt deinen Rechenweg.";sol&&sol.classList.add("show");updateHelpLadder(task,4,true);}
+  else{fb.className="feedback show bad";const arr=hints[id]||["Prüfe Gegeben, Gesucht, Formel und Einheit."];fb.textContent="Noch nicht richtig. "+arr[Math.min(tries-1,arr.length-1)];sol&&sol.classList.remove("show");updateHelpLadder(task,Math.min(tries,3),false);}
+ });
+ if(help)help.addEventListener("click",()=>{tries++;fb.className="feedback show bad";const arr=hints[id]||["Prüfe Gegeben, Gesucht, Formel und Einheit."];fb.textContent="Hinweis: "+arr[Math.min(tries-1,arr.length-1)];updateHelpLadder(task,Math.min(tries,3),false);});
+ if(sample)sample.addEventListener("click",()=>sol&&sol.classList.toggle("show"));
+});
+const quizAnswers={q1:"b",q2:"a",q3:"b",q4:"a",q5:"a"};
+const quizBtn=document.getElementById("quizCheck");
+if(quizBtn)quizBtn.addEventListener("click",()=>{
+ let score=0;
+ Object.entries(quizAnswers).forEach(([q,a])=>{
+   const picked=document.querySelector('input[name="'+q+'"]:checked');
+   if(picked&&picked.value===a)score++;
+ });
+ const result=document.getElementById("quizResult");
+ result.className="quiz-result show";
+ result.textContent=score+" von 5 richtig. "+(score>=4?"✓ Stark – die Grundlagen sitzen.":"Noch nicht ganz. Schau dir die Aufgaben mit Hinweisen noch einmal an und versuche es erneut.");
+});
+</script>
+</body></html>

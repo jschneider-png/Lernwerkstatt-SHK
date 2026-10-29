@@ -1,0 +1,141 @@
+<!doctype html><html lang='de'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Startseite | Lernwerkstatt Heizungstechnik</title><style>
+:root{--bg:#f5f8fb;--ink:#172634;--muted:#617484;--navy:#102c43;--blue:#23658b;--accent:#ee9b32;--line:#dbe5ec;--soft:#edf4f8;--green:#528066;--future:#a9b5be}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:linear-gradient(#fbfdff,#eef4f7);color:var(--ink)}a{color:inherit}.container{max-width:1250px;margin:auto;padding:0 22px}
+header{position:sticky;top:0;z-index:50;background:rgba(16,44,67,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1)}.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;color:white;text-decoration:none}.brand-logo{width:48px;height:48px}.brand strong{display:block;font-size:1.03rem}.brand small{display:block;color:#bfd2df;margin-top:2px;font-size:.78rem}.menu{display:flex;gap:5px;flex-wrap:wrap}.menu a{color:#edf5f9;text-decoration:none;font-weight:700;font-size:.88rem;padding:9px 11px;border-radius:9px}.menu a:hover,.menu a[aria-current='page']{background:rgba(255,255,255,.15)}
+.hero{background:linear-gradient(120deg,#102a40 0,#1f5876 58%,#2b8497 100%);color:white;padding:58px 0}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center}.kicker{font-size:.76rem;letter-spacing:.15em;font-weight:850;color:#bee6ed;margin-bottom:12px;text-transform:uppercase}.hero h1{font-size:clamp(2.45rem,5vw,4.1rem);line-height:1.02;letter-spacing:-.04em;margin:0 0 18px}.hero p{font-size:1.04rem;line-height:1.7;color:#dcebf2;max-width:760px;margin:0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 15px;border-radius:11px;text-decoration:none;font-weight:800;border:1px solid transparent;cursor:pointer}.primary{background:var(--accent);color:#183247}.ghost{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.08);color:#fff}.secondary{background:var(--soft);color:var(--blue);border-color:var(--line)}.btn.outline{border-color:#c1d3df;background:#fff;color:var(--blue)}
+.hero-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:19px;padding:22px}.hero-card h2{margin:6px 0 10px}.hero-card p{font-size:.95rem;color:#dcebf2}.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.meta{background:rgba(0,0,0,.12);border-radius:10px;padding:11px}.meta strong{display:block;font-size:.73rem;color:#bee6ed;margin-bottom:4px}
+.section{padding:42px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:24px}.section-head h2{margin:5px 0 0;font-size:clamp(1.7rem,3vw,2.45rem)}.section-head p{margin:0;color:var(--muted);max-width:640px;line-height:1.6}.eyebrow{font-size:.75rem;font-weight:850;letter-spacing:.11em;color:var(--blue);text-transform:uppercase}
+.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px}.card p{color:var(--muted);line-height:1.6}.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.quick-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;min-height:148px;text-decoration:none;transition:.2s}.quick-card:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(28,58,78,.11)}.quick-icon{width:44px;height:44px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-weight:900;color:var(--blue);font-size:1.2rem}.quick-card strong{display:block;margin:16px 0 6px}.quick-card span{color:var(--muted);font-size:.9rem;line-height:1.45}.quick-arrow{position:absolute;right:18px;top:18px;color:var(--blue);font-weight:900}
+footer{background:#0f273a;color:#aec1cf;padding:30px 0;margin-top:28px}.footer-row{display:flex;justify-content:space-between;gap:16px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#eaf3f8;color:var(--blue);font-size:.82rem;font-weight:700}
+.info-note{background:#fff8e9;border:1px dashed #e0b15e;border-radius:12px;padding:13px 15px;color:#6d5326;font-size:.92rem}
+.room{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 22px 60px rgba(25,52,70,.14);background:#fff;line-height:0;isolation:isolate}.room img{width:100%;height:auto;display:block}.room .hotspot-map{position:absolute;inset:0;width:100%;height:100%;z-index:3;overflow:visible}.hotspot-map a{cursor:pointer;outline:none}
+.hotspot-map a rect,.hotspot-map a polygon{
+  fill:rgba(35,101,139,0);
+  stroke:none;
+  vector-effect:non-scaling-stroke;
+  transition:fill .16s ease,filter .16s ease;
+}
+.hotspot-map a:hover rect,.hotspot-map a:hover polygon,
+.hotspot-map a:focus-visible rect,.hotspot-map a:focus-visible polygon{
+  fill:rgba(35,101,139,.14);
+  stroke:none;
+  filter:drop-shadow(0 0 5px rgba(35,101,139,.20));
+}
+.hotspot-map a:focus-visible{outline:none}
+.poster{position:relative;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 18px 46px rgba(25,52,70,.12)}.poster img{display:block;width:100%;height:auto}.poster .spot{position:absolute;border:2px solid transparent;border-radius:18px}.poster .spot:hover,.poster .spot:focus{outline:none;border-color:#fff;box-shadow:0 0 0 4px rgba(238,155,50,.85),0 12px 28px rgba(0,0,0,.18)}
+.modal{position:fixed;inset:0;background:rgba(10,25,37,.7);display:none;align-items:center;justify-content:center;padding:22px;z-index:200}.modal.active{display:flex}.modal-panel{width:min(1100px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:22px;padding:22px;border:1px solid var(--line);box-shadow:0 28px 80px rgba(0,0,0,.26)}.modal-head{display:flex;justify-content:space-between;gap:16px;align-items:start;margin-bottom:18px}.modal-close{border:0;background:#edf4f8;color:var(--blue);width:42px;height:42px;border-radius:12px;font-size:1.2rem;font-weight:900;cursor:pointer}.bw-select-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.bw-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:240px}.bw-card h3{margin:0;font-size:1.08rem}.bw-card small{color:var(--blue);font-weight:800}.bw-card ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.5;font-size:.93rem}.bw-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.topic-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.topic-card h4{margin:0 0 10px}.topic-card p{margin:0;color:var(--muted);line-height:1.55}
+.material-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.material-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.material-card h3{margin:0 0 10px}.material-card ul{margin:10px 0 0;padding-left:18px;color:var(--muted)} details.group{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;margin:12px 0;overflow:hidden} details.group summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;color:var(--navy)} details.group summary::-webkit-details-marker{display:none} details.group[open] summary{background:var(--soft)} .link-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 16px}.link-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8fbfd;border:1px solid var(--line);padding:12px 14px;border-radius:12px}.link-item strong{font-size:.92rem}.link-item a{color:var(--blue);font-weight:800;text-decoration:none;font-size:.9rem}
+@media(max-width:1000px){.grid-2,.hero-grid,.topic-grid,.grid-4,.grid-6,.material-grid,.bw-select-grid{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.container{padding:0 14px}.menu{gap:2px}.menu a{font-size:.78rem;padding:7px}.brand small{display:none}.grid-2,.grid-3,.grid-4,.grid-6,.material-grid,.topic-grid,.bw-select-grid,.link-list{grid-template-columns:1fr}.hero{padding:46px 0}.section-head{flex-direction:column;align-items:flex-start}.footer-row,.nav{flex-direction:column;align-items:flex-start}}
+
+/* ===== BYCS-EMBED-MODUS: kompakt, scharf, ohne CSS-Skalierung ===== */
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  text-rendering:optimizeLegibility;
+  scroll-behavior:smooth;
+}
+body{
+  min-width:0 !important;
+  overflow-x:hidden !important;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif !important;
+  -webkit-font-smoothing:auto !important;
+  -moz-osx-font-smoothing:auto !important;
+}
+header{
+  position:relative !important;
+  top:auto !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.quick-card,.quick-card:hover,.card,.btn,.topic-card,.bw-card{
+  transform:none !important;
+  filter:none !important;
+}
+footer{margin-top:18px !important}
+
+/* BYCS-Startseite: direkt ins Klassenzimmer, kein großer Hero */
+.hero{display:none !important}
+body>header{display:none !important}
+body>footer{display:none !important}
+main>.section:first-of-type{padding:12px 0 16px !important}
+main>.section:first-of-type .section-head{
+  margin-bottom:12px !important;
+  align-items:center !important;
+}
+main>.section:first-of-type .section-head:before{
+  content:"BYCS · Virtuelles Klassenzimmer";
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eaf3f8;
+  color:#23658b;
+  font-weight:800;
+  font-size:.78rem;
+  margin-bottom:8px;
+}
+main>.section:nth-of-type(2){padding:14px 0 22px !important}
+.container{max-width:1400px !important;padding-left:14px !important;padding-right:14px !important}
+.room{border-radius:14px !important;box-shadow:0 10px 30px rgba(25,52,70,.10) !important}
+.quick-card{min-height:110px !important;padding:15px !important}
+.quick-card strong{margin-top:10px !important}
+
+</style><style id="eingang-styles">
+.eingang-section{padding-top:10px}
+.eingang-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}
+.eingang-intro h2{margin:6px 0 8px}
+.eingang-intro p{color:var(--muted);line-height:1.6;max-width:650px;margin:0}
+.eingang-alle{flex-shrink:0;color:var(--primary,#2174a2);font-weight:750;text-decoration:none;padding:10px 0}
+.eingang-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.eingang-bw{display:flex;align-items:center;gap:10px;min-height:72px;background:var(--card,#fff);border:1px solid var(--line,#d9e1e5);border-radius:14px;padding:14px;color:var(--text,#1c3140);text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,.035);transition:border-color .18s,transform .18s}
+.eingang-bw:hover,.eingang-bw:focus-visible{border-color:var(--primary,#2174a2);transform:translateY(-2px);outline-offset:3px}
+.eingang-num{font-size:12px;font-weight:800;white-space:nowrap;background:rgba(38,126,161,.1);border-radius:8px;padding:7px;color:var(--primary,#2174a2)}
+.eingang-topic{font-size:13px;font-weight:700;line-height:1.3;flex:1}
+.eingang-arr{font-size:18px;opacity:.65}
+@media(max-width:900px){.eingang-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:680px){.eingang-intro{display:block}.eingang-alle{display:inline-block;margin-top:10px}.eingang-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.eingang-grid{grid-template-columns:1fr}}
+</style>
+</head><body data-bycs-embed='true'><header><div class='container nav'><a class='brand' href='bycs.html'><img class='brand-logo' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMjAgMTIwJz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0nbycgeDE9JzAnIHkxPScwJyB4Mj0nMScgeTI9JzEnPjxzdG9wIHN0b3AtY29sb3I9JyNmZjlmMjUnLz48c3RvcCBvZmZzZXQ9JzEnIHN0b3AtY29sb3I9JyNlYTVmMjcnLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9J2InIHgxPScwJyB5MT0nMCcgeDI9JzEnIHkyPScxJz48c3RvcCBzdG9wLWNvbG9yPScjNGJjMmVmJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMTQ3OWJiJy8+PC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8cGF0aCBkPSdNNTUgOEM0NCAyOSAyOSAzOSAyOSA1OGMwIDE1IDExIDI3IDI2IDI3IDkgMCAxNy00IDIyLTExLTYgMy0xMyAyLTE4LTEtMTItNy0xNC0yMi04LTMzIDUtOSAxMC0xOCA0LTMyeicgZmlsbD0ndXJsKCNvKScvPgo8cGF0aCBkPSdNNjYgMzFjLTUgMTQtMTUgMjUtMTUgMzkgMCAxNyAxMyAzMSAzMCAzMXMzMC0xMyAzMC0zMGMwLTE3LTEzLTI5LTI1LTQyIDIgMTgtOCAzMS0yMCAzOCA5LTEyIDExLTI0IDAtMzZ6JyBmaWxsPSd1cmwoI2IpJy8+Cjwvc3ZnPg==' alt=''><span><strong>Lernwerkstatt Heizungstechnik</strong><small>Dein digitales Klassenzimmer</small></span></a><nav class='menu'><a href='bycs.html' aria-current="page">Startseite</a><a href='lernpfad-bycs.html' >Lernlandkarten</a><a href='lernorte-bycs.html' >Links & Lernorte</a><a href='aktuelles-bycs.html' >Aktuelles</a><a href='jahresreise-karte-bycs.html' >Jahresreise</a></nav></div></header><main>
+<section class='section'><div class='container'><div class='section-head'><div><div class='eyebrow'>Dein digitaler Fachraum</div><h2>Virtuelles Klassenzimmer</h2></div><p>Klicke auf einen Bereich im Raum oder steige unten direkt in deine Blockwoche ein. Im Materialregal sind alle sechs Fächer einzeln anwählbar.</p></div><!-- LEHRKRAFT-HINWEIS: Die sechs Regalflächen sind im SVG darunter als einzelne Links definiert. --><div class='room'><img src='klassenzimmer.png' alt='Virtuelles Klassenzimmer'><svg class='hotspot-map' viewBox='0 0 1672 941' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' aria-label='Anklickbare Lernorte im Klassenzimmer'><a href='#' onclick='openBwModal();return false;' aria-label='Lernlandkarte auswählen'><title>Lernlandkarte</title><polygon points='175,102 441,106 440,465 167,465'/></a><a href='lernorte-bycs.html#tafelbilder' aria-label='Tafelbilder'><title>Tafelbilder</title><polygon points='456,78 1060,82 1060,484 453,484'/></a><a href='lernorte-bycs.html#lernraum' aria-label='Virtueller Lernraum'><title>Virtueller Lernraum</title><polygon points='45,498 256,498 246,628 8,628'/></a><a href='jahresreise-karte-bycs.html' aria-label='Jahresreise'><title>Jahresreise</title><polygon points='1405,32 1647,12 1645,227 1404,255'/></a><a href='#' target='_blank' rel='noopener noreferrer' aria-label='Mebis'><title>Mebis</title><polygon points='1351,263 1567,266 1568,499 1350,499'/></a><!-- MATERIALREGAL: sechs exakt getrennte, unsichtbare Klickflächen -->
+<a href='lernorte-bycs.html#skripte' aria-label='Skripte'>
+  <title>Skripte öffnen</title>
+  <rect x='1086' y='405' width='90' height='78' rx='2'/>
+</a>
+<a href='lernorte-bycs.html#arbeitsblaetter' aria-label='Arbeitsblätter'>
+  <title>Arbeitsblätter öffnen</title>
+  <rect x='1176' y='405' width='90' height='78' rx='2'/>
+</a>
+<a href='lernorte-bycs.html#videos' aria-label='Videos'>
+  <title>Videos öffnen</title>
+  <rect x='1086' y='483' width='90' height='72' rx='2'/>
+</a>
+<a href='lernorte-bycs.html#normen' aria-label='Normen'>
+  <title>Normen öffnen</title>
+  <rect x='1176' y='483' width='90' height='72' rx='2'/>
+</a>
+<a href='lernorte-bycs.html#fachbuecher' aria-label='Fachbücher'>
+  <title>Fachbücher öffnen</title>
+  <rect x='1086' y='555' width='90' height='78' rx='2'/>
+</a>
+<a href='lernorte-bycs.html#links' aria-label='Links'>
+  <title>Links öffnen</title>
+  <rect x='1176' y='555' width='90' height='78' rx='2'/>
+</a></svg></div></div></section>
+<section class="section eingang-section" aria-labelledby="direkteinstieg"><div class="container"><div class="eingang-intro"><div><div class="eyebrow">Heizungstechnik · 12. Klasse</div><h2 id="direkteinstieg">Dein Einstieg in die Blockwochen</h2><p>Wähle deine Blockwoche und beginne direkt mit der Lernlandkarte. Du kannst auch die Bereiche im virtuellen Klassenzimmer anklicken.</p></div><a class="eingang-alle" href="lernpfad-bycs.html?bw=1">Zum Lernpfad <span aria-hidden="true">→</span></a></div><div class="eingang-grid"><a class="eingang-bw" href="lernpfad-bycs.html?bw=1" aria-label="Blockwoche 1: Brennstoffe"><span class="eingang-num">BW 01</span><span class="eingang-topic">Brennstoffe</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=2" aria-label="Blockwoche 2: Verbrennung & Energie"><span class="eingang-num">BW 02</span><span class="eingang-topic">Verbrennung & Energie</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=3" aria-label="Blockwoche 3: Heizöllagerung"><span class="eingang-num">BW 03</span><span class="eingang-topic">Heizöllagerung</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=4" aria-label="Blockwoche 4: Festbrennstofflager"><span class="eingang-num">BW 04</span><span class="eingang-topic">Festbrennstofflager</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=5" aria-label="Blockwoche 5: Abgassysteme I"><span class="eingang-num">BW 05</span><span class="eingang-topic">Abgassysteme I</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=6" aria-label="Blockwoche 6: Abgassysteme II"><span class="eingang-num">BW 06</span><span class="eingang-topic">Abgassysteme II</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=7" aria-label="Blockwoche 7: Abgasmessung"><span class="eingang-num">BW 07</span><span class="eingang-topic">Abgasmessung</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=8" aria-label="Blockwoche 8: Wärmepumpe I"><span class="eingang-num">BW 08</span><span class="eingang-topic">Wärmepumpe I</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=9" aria-label="Blockwoche 9: Wärmepumpe II"><span class="eingang-num">BW 09</span><span class="eingang-topic">Wärmepumpe II</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=10" aria-label="Blockwoche 10: Wärmepumpe III"><span class="eingang-num">BW 10</span><span class="eingang-topic">Wärmepumpe III</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=11" aria-label="Blockwoche 11: Wärmepumpe IV"><span class="eingang-num">BW 11</span><span class="eingang-topic">Wärmepumpe IV</span><span class="eingang-arr" aria-hidden="true">→</span></a>
+<a class="eingang-bw" href="lernpfad-bycs.html?bw=12" aria-label="Blockwoche 12: Projekt & Abschluss"><span class="eingang-num">BW 12</span><span class="eingang-topic">Projekt & Abschluss</span><span class="eingang-arr" aria-hidden="true">→</span></a></div></div></section><section class='section'><div class='container grid-3'><a class='quick-card' href='#' onclick='openBwModal();return false;'><span class='quick-arrow'>+</span><div class='quick-icon'>⌘</div><strong>Lernlandkarten</strong><span>Über die Lernlandkarte wählst du Blockwoche 1 bis 12 aus. Zu jeder Blockwoche kann später eine eigene Karte ergänzt werden.</span></a><a class='quick-card' href='jahresreise-karte-bycs.html'><span class='quick-arrow'>↗</span><div class='quick-icon'>◎</div><strong>Jahresreise</strong><span>Der Schuljahresfahrplan mit allen 12 Blockwochen und direkter Verlinkung in die Lernlandkarten.</span></a><a class='quick-card' href='lernorte-bycs.html#materialien'><span class='quick-arrow'>↓</span><div class='quick-icon'>☁</div><strong>Materialien</strong><span>Skripte, Arbeitsblätter, Videos, Normen, Fachbücher und Links – alles direkt anwählbar.</span></a></div></section></main>
+<div class='modal' id='bwModal' aria-hidden='true'><div class='modal-panel'><div class='modal-head'><div><div class='eyebrow'>Lernlandkarten auswählen</div><h2>Blockwoche 1 bis 12</h2><p style='color:var(--muted);max-width:780px'>Klicke auf eine Blockwoche. Über <strong>Lernlandkarte</strong> gelangst du zur Themenübersicht. Über <strong>Mebis</strong> kannst du später direkt zum Kursabschnitt verlinken.</p></div><button class='modal-close' type='button' aria-label='Schließen' onclick='closeBwModal()'>×</button></div><div class='bw-select-grid'><article class='bw-card'><small>Blockwoche 1</small><h3>Brennstoffe</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Welche Brennstoffe kommen für moderne Wärmeerzeugungsanlagen infrage und nach welchen Kriterien werden sie ausgewählt?</p><ul><li>Brennstoffe: Überblick und Einordnung</li><li>Eigenschaften flüssiger Brennstoffe</li><li>Eigenschaften fester Brennstoffe</li><li>Brennstoffwahl im Kundenauftrag</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=1'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 2</small><h3>Verbrennung & Energie</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wie viel nutzbare Energie steckt in einer Brennstoffmenge?</p><ul><li>Heizwert, Brennwert und Energieinhalt</li><li>Brennstoffbedarf ermitteln</li><li>Grundlagen der Verbrennung</li><li>Verbrennungsprodukte und Emissionen</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=2'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 3</small><h3>Heizöllagerung</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Welche Bauteile benötigt eine sichere Heizöllageranlage?</p><ul><li>Lagerung flüssiger Brennstoffe: Systemaufbau</li><li>Aufstellraum und Schutzmaßnahmen</li><li>Befüllung, Entlüftung und Entnahme</li><li>Prüfung einer Heizöllageranlage</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=3'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 4</small><h3>Festbrennstofflager</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wie muss ein Pelletlager gestaltet sein, damit Austragung, Qualität und Sicherheit gewährleistet sind?</p><ul><li>Lagerung von Pellets</li><li>Lagerung von Scheitholz und Hackschnitzeln</li><li>Gefährdungen in Brennstofflagern</li><li>Lagerkonzept planen</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=4'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 5</small><h3>Abgassysteme I</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wie führen Abgassysteme Verbrennungsprodukte sicher aus dem Gebäude?</p><ul><li>Aufgabe und Arten von Abgassystemen</li><li>Naturzug, Förderdruck und Druckverluste</li><li>Werkstoffe und Temperaturklassen</li><li>Querschnitt und Systemauswahl</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=5'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 6</small><h3>Abgassysteme II</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wann entsteht Kondensat im Abgasweg und wie wird es sicher abgeführt?</p><ul><li>Feuchtebetrieb und Kondensat</li><li>Brandschutz und Abstände</li><li>Verbrennungsluftversorgung und Aufstellraum</li><li>Abgasanlage für einen Kundenauftrag planen</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=6'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 7</small><h3>Abgasmessung</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Welche Aussagen liefern O₂, CO₂, CO, Abgastemperatur, Zug und Abgasverlust?</p><ul><li>Ziele und Messgrößen der Abgasmessung</li><li>Messgerät vorbereiten und Messung durchführen</li><li>Messwerte auswerten und Störungen erkennen</li><li>Dokumentation und Lernerfolgssicherung</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=7'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 8</small><h3>Wärmepumpe I</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wie kann Umweltwärme auf ein für die Heizung nutzbares Temperaturniveau gebracht werden?</p><ul><li>Grundprinzip der Wärmepumpe</li><li>Kältekreislauf und Hauptbauteile</li><li>Temperaturniveau und Leistungszahl</li><li>Eignungsprüfung eines Gebäudes</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=8'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 9</small><h3>Wärmepumpe II</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Welche Wärmequelle passt zu Grundstück, Gebäude und Betreiber?</p><ul><li>Luft als Wärmequelle</li><li>Erdreich als Wärmequelle</li><li>Grundwasser als Wärmequelle</li><li>Wärmequellen vergleichen</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=9'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 10</small><h3>Wärmepumpe III</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wann sind monovalenter, monoenergetischer und bivalenter Betrieb sinnvoll?</p><ul><li>Betriebsweisen von Wärmepumpenanlagen</li><li>Hydraulische Einbindung</li><li>Warmwasserbereitung und Hygiene</li><li>Systemplanung im Grundriss</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=10'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 11</small><h3>Wärmepumpe IV</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Welche Kennzahl beschreibt Prüfstand, Saison und reale Anlage?</p><ul><li>COP, SCOP und Jahresarbeitszahl</li><li>Betriebskosten und Umweltwirkung</li><li>Fehlersuche an Wärmepumpenanlagen</li><li>Anlage optimieren</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=11'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article><article class='bw-card'><small>Blockwoche 12</small><h3>Projekt & Abschluss</h3><p style='margin:0;color:var(--muted);line-height:1.55'>Wie entsteht aus Kundendaten ein schlüssiges Anlagenkonzept?</p><ul><li>Projektauftrag: Wärmepumpenanlage auslegen</li><li>Projektarbeit: System auswählen und planen</li><li>Fachgespräch und Kundenberatung</li><li>Inbetriebnahme, Übergabe und Abschluss</li></ul><div class='bw-actions'><a class='btn secondary' href='lernpfad-bycs.html?bw=12'>Lernlandkarte</a><a class='btn outline' href='#' target='_blank' rel='noopener'>Mebis ↗</a></div></article></div></div></div>
+<script>function openBwModal(){document.getElementById('bwModal').classList.add('active');document.body.style.overflow='hidden';}function closeBwModal(){document.getElementById('bwModal').classList.remove('active');document.body.style.overflow='';}document.getElementById('bwModal').addEventListener('click',function(e){if(e.target===this)closeBwModal();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBwModal();});</script><footer><div class='container footer-row'><span>© Lernwerkstatt Heizungstechnik</span><span>Virtuelles Klassenzimmer · Lernlandkarten · Jahresreise</span></div></footer></body></html>

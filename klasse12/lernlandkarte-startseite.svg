@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-labelledby="t d">
+<title id="t">Lernlandkarte Heizungstechnik – 12. Klasse</title>
+<desc id="d">Übersicht über zwölf Blockwochen der Heizungstechnik</desc>
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#69b9e9"/><stop offset="1" stop-color="#eaf7ff"/></linearGradient>
+ <linearGradient id="land" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#80b85b"/><stop offset="1" stop-color="#d8eaa9"/></linearGradient>
+ <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity=".22"/></filter>
+</defs>
+<rect width="600" height="900" rx="24" fill="#f7fbfd"/>
+<rect width="600" height="150" rx="24" fill="#075183"/>
+<rect y="125" width="600" height="255" fill="url(#sky)"/>
+<path d="M0 300 90 225 145 270 230 185 305 260 380 205 470 270 540 210 600 260V400H0Z" fill="#dcecf4"/>
+<path d="M0 345 105 285 170 330 270 250 355 330 445 280 600 355V430H0Z" fill="#8bb3c8"/>
+<rect y="360" width="600" height="540" fill="url(#land)"/>
+<text x="34" y="58" font-family="Arial,Helvetica,sans-serif" font-size="48" font-weight="800" fill="white">Lernlandkarte</text>
+<text x="34" y="108" font-family="Arial,Helvetica,sans-serif" font-size="40" font-weight="800" fill="white">Heizungstechnik</text>
+<rect x="330" y="104" width="235" height="36" rx="18" fill="#fff" opacity=".96"/>
+<text x="447" y="129" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" fill="#154a6d">12. Klasse · 12 BW</text>
+<path d="M70 420 C180 365 210 465 305 415 S470 370 535 440 C460 480 430 525 330 500 S175 500 80 555 C170 600 235 560 320 610 S455 630 525 690 C430 725 380 700 300 745 S150 760 80 820" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-dasharray="16 18" opacity=".95"/>
+<!-- cards -->
+<g font-family="Arial,Helvetica,sans-serif" filter="url(#sh)">
+<g transform="translate(28 382)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#ef452b"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">1</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 1</text><text x="72" y="59" font-size="18" font-weight="700" fill="#123f63">Systemübersicht</text></g>
+<g transform="translate(327 382)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#f47b20"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">2</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 2</text><text x="72" y="59" font-size="18" font-weight="700" fill="#123f63">Wärmeerzeuger</text></g>
+<g transform="translate(28 482)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#f2ae00"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">3</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 3</text><text x="72" y="59" font-size="18" font-weight="700" fill="#123f63">Hydraulik</text></g>
+<g transform="translate(327 482)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#55a72c"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">4</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 4</text><text x="72" y="59" font-size="18" font-weight="700" fill="#123f63">Wärmeverteilung</text></g>
+<g transform="translate(28 582)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#16a27e"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">5</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 5</text><text x="72" y="59" font-size="18" font-weight="700" fill="#123f63">Regelungstechnik</text></g>
+<g transform="translate(327 582)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#178fd0"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">6</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 6</text><text x="72" y="59" font-size="18" font-weight="700" fill="#123f63">Abgassysteme</text></g>
+<g transform="translate(28 682)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#1e7fc4"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">7</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 7</text><text x="72" y="57" font-size="16" font-weight="700" fill="#123f63">Mess- &amp; Prüftechnik</text></g>
+<g transform="translate(327 682)"><rect width="245" height="86" rx="16" fill="#fff"/><circle cx="36" cy="26" r="25" fill="#7927b6"/><text x="36" y="35" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">8</text><text x="72" y="31" font-size="20" font-weight="800" fill="#123f63">BW 8</text><text x="72" y="55" font-size="15" font-weight="700" fill="#123f63">Wärmepumpe Grundlagen</text></g>
+<g transform="translate(28 782)"><rect width="165" height="86" rx="16" fill="#fff"/><circle cx="31" cy="25" r="23" fill="#e8243b"/><text x="31" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">9</text><text x="62" y="30" font-size="18" font-weight="800" fill="#123f63">BW 9</text><text x="62" y="54" font-size="13" font-weight="700" fill="#123f63">Wärmepumpe</text></g>
+<g transform="translate(207 782)"><rect width="165" height="86" rx="16" fill="#fff"/><circle cx="31" cy="25" r="23" fill="#d9296b"/><text x="31" y="34" text-anchor="middle" font-size="21" font-weight="800" fill="#fff">10</text><text x="62" y="30" font-size="18" font-weight="800" fill="#123f63">BW 10</text><text x="62" y="54" font-size="13" font-weight="700" fill="#123f63">Effizienz</text></g>
+<g transform="translate(386 782)"><rect width="186" height="86" rx="16" fill="#fff"/><circle cx="31" cy="25" r="23" fill="#14a3ae"/><text x="31" y="34" text-anchor="middle" font-size="21" font-weight="800" fill="#fff">11</text><text x="62" y="30" font-size="18" font-weight="800" fill="#123f63">BW 11</text><text x="62" y="54" font-size="13" font-weight="700" fill="#123f63">Fehlersuche</text></g>
+</g>
+<g transform="translate(205 864)"><rect width="190" height="28" rx="14" fill="#7e31b3"/><text x="95" y="20" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="800" fill="#fff">BW 12 · Projekt &amp; Planung</text></g>
+</svg>

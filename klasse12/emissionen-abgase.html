@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abgase & Emissionen · Stunde 4</title>
+<style>
+:root{--navy:#123e5a;--blue:#176f9b;--line:#c7dce7;--text:#1d3949;--muted:#5f7684;--ok:#1f7a45;--warn:#ad5a18}
+*{box-sizing:border-box}body{margin:0;font-family:Verdana,Arial,sans-serif;background:#f5f9fb;color:var(--text)}
+header{background:linear-gradient(100deg,#123e5a,#176f9b);color:#fff;padding:18px 16px}.wrap{width:min(1180px,96vw);margin:auto}.back{color:#daf2ff;text-decoration:none;font-weight:700}
+h1{margin:8px 0 3px;font-size:1.55rem}.sub{margin:0;color:#d6edf8;font-size:.94rem}
+.stage{position:relative;margin:18px auto;border:1px solid #a9cddd;border-radius:18px;overflow:hidden;background:#0d5378;box-shadow:0 16px 36px rgba(18,58,82,.15)}
+.stage>img{display:block;width:100%;height:auto}
+.timer-row{display:flex;justify-content:flex-end;margin:8px 0 6px}
+.timer{position:static;z-index:15;background:#0b527d;color:#fff;border:1px solid #9edcf5;border-radius:12px;padding:8px 11px;display:flex;gap:9px;align-items:center;font-weight:800}.timer small{font-size:.65rem;color:#bfe9fb}.timer strong{font-size:1.1rem;font-variant-numeric:tabular-nums}.timer.done{background:#a53b2c}
+.hot{position:absolute;border:0;background:transparent;border-radius:50%;cursor:help;z-index:5}
+.hot:hover,.hot:focus-visible,.hot.active{outline:none;background:rgba(255,255,255,.035);box-shadow:0 0 0 3px rgba(185,235,255,.48),0 0 14px rgba(80,185,225,.24)}
+.hover-card{position:absolute;z-index:20;display:none;width:min(330px,38%);pointer-events:none;background:rgba(255,255,255,.975);border:1px solid #c9dbe4;border-radius:14px;box-shadow:0 16px 36px rgba(4,34,51,.28);overflow:hidden}
+.hover-card.show{display:block}
+.hover-head{padding:10px 12px;color:#fff;font-weight:900;font-size:.96rem}
+.hover-head.green{background:#087332}.hover-head.blue{background:#0b5f9c}.hover-head.red{background:#c92b16}.hover-head.orange{background:#d36c0d}.hover-head.gold{background:#d39b08}.hover-head.gray{background:#4e5962}
+.hover-body{padding:9px 10px;display:grid;gap:7px}
+.hover-item{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;padding:7px 8px;border-radius:9px;background:#f7fafc;border:1px solid #e2ebef}
+.hover-icon{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#e9f2f6;font-size:.82rem}
+.hover-item strong{display:block;color:#244f67;font-size:.78rem;margin-bottom:2px}.hover-item span{display:block;color:#536b78;font-size:.75rem;line-height:1.35}
+.hover-reaction{margin-top:3px;padding:5px 7px;border-radius:7px;background:#edf6fb;color:#184d69;font-weight:800;font-size:.76rem}
+@media(max-width:760px){.hover-card{width:min(360px,88%);left:6%!important;right:auto!important}.timer{padding:6px 8px}}
+.hint{margin:8px 2px 16px;color:var(--muted);font-size:.82rem}
+.lesson{margin:20px 0 32px}.section-title{margin:22px 0 9px;color:var(--navy)}.steps{display:grid;gap:12px}.task{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px}.task h3{margin:0 0 7px;color:#174b68;font-size:1rem}.task p{margin:5px 0;color:#536f7e;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field{display:grid;gap:5px;margin-top:8px}.field label{font-size:.82rem;font-weight:700;color:#315a70}input,textarea,select{width:100%;padding:9px 10px;border:1px solid #b8ced9;border-radius:8px;font:inherit;background:#fbfdfe}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.btn{border:0;border-radius:8px;padding:9px 12px;font:inherit;font-weight:700;cursor:pointer}.check{background:var(--blue);color:#fff}.help{background:#e7f2f7;color:#244e66}.sample{background:#eef1f3;color:#435a68}
+.feedback,.solution{display:none;margin-top:9px;padding:10px;border-radius:8px;font-size:.86rem;line-height:1.5}.show{display:block}.feedback.ok{background:#edf8f1;color:var(--ok);border:1px solid #b8dec6}.feedback.bad{background:#fff4e9;color:#7c4b18;border:1px solid #e9cda5}.solution{background:#eef7fb;border-left:4px solid #4a9ec2;color:#365b70}
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}.ladder span{padding:7px 8px;border-radius:8px;background:#eef3f6;border:1px solid #d8e3e9;color:#627985;font-size:.75rem;font-weight:700;text-align:center}.ladder span.active{background:#fff1d8;border-color:#e8c57d;color:#8a5718}.ladder span.done{background:#edf8f1;border-color:#b8dec6;color:#1d6b43}
+.compare{width:100%;border-collapse:collapse;margin-top:9px;font-size:.83rem}.compare th,.compare td{border:1px solid #cbdbe4;padding:7px;vertical-align:top}.compare th{background:#eef5f9;color:#315a70}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.ladder{grid-template-columns:1fr}}
+.presentation-entry{position:absolute;left:2%;top:2%;z-index:12;background:#f5b640;color:#142f44;padding:12px 15px;border:2px solid white;border-radius:13px;font-size:clamp(.75rem,1.6vw,1rem);font-weight:900;text-decoration:none;box-shadow:0 6px 22px #0004}.presentation-entry:hover,.presentation-entry:focus-visible{background:#ffe08b;outline:3px solid #123e5a}@media(max-width:660px){.presentation-entry{padding:7px;font-size:.7rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="back" href="lernpfad.html?bw=2">← zurück zu BW2</a><h1>Abgase & Emissionen · Qualitätsmesser der Verbrennung</h1><p class="sub">Stunde 4 · Verbrennungsprodukte verstehen, Abgaswerte deuten und Emissionen beurteilen.</p></div></header>
+<main class="wrap">
+<div class="timer-row"><div class="timer" id="timer"><small>LESEZEIT</small><strong id="timerValue">02:30</strong></div></div>
+<div class="stage" id="stage">
+<a class="presentation-entry" href="bw2-s4-kundenauftrag-emissionen.html" aria-label="Kundenauftrag als Folienpräsentation öffnen, ohne Timer">📽️ Kundenauftrag · Folien ohne Timer →</a>
+<img src="emissionen-abgase.png?v=20261025-2100" alt="Abgase und Emissionen mit CO2, H2O, O2, N2, NOx, CO, SO2 und Ruß">
+<button class="hot" data-k="co2" aria-label="CO2" style="left:36.7%;top:6.2%;width:9.7%;height:17.0%"></button>
+<button class="hot" data-k="h2o" aria-label="H2O" style="left:52.5%;top:4.2%;width:9.7%;height:17.3%"></button>
+<button class="hot" data-k="o2" aria-label="O2" style="left:31.1%;top:22.2%;width:9.8%;height:16.5%"></button>
+<button class="hot" data-k="n2" aria-label="N2" style="left:47.0%;top:21.5%;width:9.8%;height:16.5%"></button>
+<button class="hot" data-k="nox" aria-label="NOx" style="left:61.2%;top:19.4%;width:9.9%;height:17.4%"></button>
+<button class="hot" data-k="co" aria-label="CO" style="left:39.5%;top:36.2%;width:9.6%;height:16.7%"></button>
+<button class="hot" data-k="so2" aria-label="SO2" style="left:54.3%;top:46.3%;width:9.5%;height:16.0%"></button>
+<button class="hot" data-k="russ" aria-label="Ruß" style="left:35.2%;top:50.3%;width:10.1%;height:17.2%"></button>
+<div class="hover-card" id="hoverCard" aria-live="polite"></div>
+</div>
+<p class="hint">Fahre mit der Maus über einen Abgasbestandteil. Auf Tablet/Smartphone antippen. Die Kurzinfos erscheinen direkt neben der jeweiligen Blase.</p>
+
+<section class="lesson">
+<h2 class="section-title">Step by step · Abgase als Qualitätsmesser</h2>
+<div class="steps">
+<article class="task"><h3>1 · Was sind Abgase?</h3><p>Erkläre in eigenen Worten, was Abgase sind und nenne mindestens vier typische Bestandteile.</p><textarea rows="3"></textarea><div class="actions"><button class="btn sample" type="button">Musterantwort vergleichen</button></div><div class="solution">Abgase sind gasförmige Produkte eines Verbrennungsprozesses. Typisch sind CO₂, H₂O, N₂ und O₂; zusätzlich können CO, NOₓ und Partikel auftreten.</div></article>
+
+<article class="task"><h3>2 · Trockenes oder feuchtes Abgas?</h3><p>Ordne zu und begründe: Warum wird für viele Berechnungen das feuchte Abgasvolumen verwendet?</p><div class="grid"><div class="field"><label>Trockenes Abgas</label><select data-correct="wenig"><option value="">Bitte wählen</option><option value="wenig">kein/kaum Wasserdampf</option><option value="viel">hoher Wasserdampfanteil</option></select></div><div class="field"><label>Feuchtes Abgas</label><select data-correct="viel"><option value="">Bitte wählen</option><option value="wenig">kein/kaum Wasserdampf</option><option value="viel">hoher Wasserdampfanteil</option></select></div></div><div class="ladder"><span class="active">1 · Denkanstoß</span><span>2 · Fachbegriff</span><span>3 · Begründung</span></div><div class="actions"><button class="btn check" type="button">Prüfen</button><button class="btn help" type="button">Hilfe</button></div><div class="feedback"></div><div class="solution">Feuchtes Abgas enthält Wasserdampf und bildet die realen Bedingungen besser ab. Bei Abkühlung kann Kondensat entstehen; die Planung wird genauer, aber die Berechnung komplexer.</div></article>
+
+<article class="task"><h3>3 · Luftverhältniszahl λ</h3><p>Bei der Messung werden CO₂ = 13,0 % und O₂ = 2,5 % festgestellt. Beurteile die Verbrennungsgüte.</p><div class="grid"><div class="field"><label>λ</label><input data-a="1.18" data-t=".03" data-unit="–"></div><div class="field"><label>Beurteilung</label><select data-correct="gering"><option value="">Bitte wählen</option><option value="gering">geringer Luftüberschuss</option><option value="hoch">sehr hoher Luftüberschuss</option></select></div></div><div class="ladder"><span class="active">1 · Denkanstoß</span><span>2 · Formel</span><span>3 · Interpretation</span></div><div class="actions"><button class="btn check" type="button">Prüfen</button><button class="btn help" type="button">Hilfe</button></div><div class="feedback"></div><div class="solution">λ ≈ 1,18. Das weist auf einen geringen Luftüberschuss hin. Ein sehr hoher Luftüberschuss würde den Wirkungsgrad verschlechtern; die Luftzufuhr müsste angepasst werden.</div></article>
+
+<article class="task"><h3>4 · CO₂ und O₂ interpretieren</h3><p>Was passiert mit CO₂- und O₂-Gehalt, wenn der Luftüberschuss zunimmt?</p><div class="grid"><div class="field"><label>CO₂-Gehalt</label><select data-correct="sinkt"><option value="">Bitte wählen</option><option value="sinkt">sinkt</option><option value="steigt">steigt</option></select></div><div class="field"><label>O₂-Gehalt</label><select data-correct="steigt"><option value="">Bitte wählen</option><option value="sinkt">sinkt</option><option value="steigt">steigt</option></select></div></div><div class="actions"><button class="btn check" type="button">Prüfen</button></div><div class="feedback"></div><div class="solution">Mit höherem Luftüberschuss sinkt der CO₂-Anteil im Abgas, während der Restsauerstoff O₂ steigt.</div></article>
+
+<article class="task"><h3>5 · Brennstoffvergleich · Emissionen</h3><table class="compare"><tr><th>Brennstoff</th><th>Hauptprodukte laut Arbeitsblatt</th><th>Umwelt/Gesundheit</th></tr><tr><td>Heizöl</td><td>CO₂, SO₂, NOₓ, Feinstaub</td><td>Klimawandel, saurer Regen, Luftverschmutzung</td></tr><tr><td>Erdgas</td><td>CO₂, H₂O, NOₓ</td><td>geringerer CO₂-Ausstoß als Heizöl; Atemwegsbelastung</td></tr><tr><td>Holz</td><td>CO₂, CO, Feinstaub, VOCs</td><td>Klimawandel/Luftverschmutzung; Atemwegserkrankungen</td></tr></table><p>Welche zwei Maßnahmen können Emissionen im Betrieb senken?</p><textarea rows="3"></textarea><div class="actions"><button class="btn sample" type="button">Musterantwort vergleichen</button></div><div class="solution">Beispiele aus dem Arbeitsblatt: moderne Brenner, Filter, regelmäßige Wartung, andere Brennstoffe bzw. regenerative Energieformen sowie höhere Energieeffizienz.</div></article>
+
+<article class="task"><h3>6 · Vorschriften</h3><p>Ordne die beiden Regelwerke zu.</p><div class="grid"><div class="field"><label>TA Luft</label><select data-correct="anlagen"><option value="">Bitte wählen</option><option value="anlagen">Grenzwerte/Maßnahmen für genehmigungspflichtige Anlagen</option><option value="klein">Grenzwerte für Kleinfeuerungsanlagen</option></select></div><div class="field"><label>1. BImSchV</label><select data-correct="klein"><option value="">Bitte wählen</option><option value="anlagen">Grenzwerte/Maßnahmen für genehmigungspflichtige Anlagen</option><option value="klein">Grenzwerte für Kleinfeuerungsanlagen</option></select></div></div><div class="actions"><button class="btn check" type="button">Prüfen</button></div><div class="feedback"></div><div class="solution">TA Luft: Grenzwerte und Maßnahmen für genehmigungspflichtige Anlagen. 1. BImSchV: Grenzwerte für Emissionen bei Kleinfeuerungsanlagen.</div></article>
+</div>
+</section>
+</main>
+<script>
+const infos={
+co2:{title:"CO₂ · Kohlendioxid",tone:"green",items:[
+ ["⚙️","Entstehung","Bei vollständiger Verbrennung kohlenstoffhaltiger Brennstoffe.","C + O₂ → CO₂"],
+ ["📊","Bedeutung","CO₂ dient zusammen mit O₂ und λ zur Beurteilung der Verbrennungsqualität."],
+ ["🌍","Umwelt","Treibhausgas; trägt zur Klimaerwärmung bei."]
+]},
+h2o:{title:"H₂O · Wasserdampf",tone:"blue",items:[
+ ["⚙️","Entstehung","Entsteht bei der Oxidation von Wasserstoff.","2H₂ + O₂ → 2H₂O"],
+ ["💧","Bedeutung","Normaler Bestandteil des feuchten Abgases."],
+ ["🔥","Technik","Bei Abkühlung kann Wasserdampf kondensieren; Brennwerttechnik nutzt diese Wärme."]
+]},
+o2:{title:"O₂ · Restsauerstoff",tone:"blue",items:[
+ ["💨","Messwert","Zeigt den Luftüberschuss im Abgas."],
+ ["📈","Interpretation","Mit zunehmendem Luftüberschuss steigt der O₂-Gehalt."],
+ ["⚠️","Hinweis","Zu viel Luft kann den Wirkungsgrad verschlechtern; zu wenig Luft begünstigt unvollständige Verbrennung."]
+]},
+n2:{title:"N₂ · Stickstoff",tone:"blue",items:[
+ ["💨","Herkunft","Stammt überwiegend aus der Verbrennungsluft."],
+ ["ℹ️","Bedeutung","Ist unter normalen Bedingungen weitgehend reaktionsträge."],
+ ["🔥","Zusammenhang","Bei hohen Temperaturen kann Stickstoff an der Bildung von NOₓ beteiligt sein."]
+]},
+nox:{title:"NOₓ · Stickoxide",tone:"orange",items:[
+ ["🔥","Entstehung","Können bei hohen Verbrennungstemperaturen aus Luftstickstoff und Sauerstoff entstehen.","N₂ + O₂ → 2NO"],
+ ["🫁","Umwelt & Gesundheit","Belasten die Atemwege und können Smog sowie saure Niederschläge fördern."],
+ ["📏","Grenzwert / Hinweis","Emissionsrelevant; zulässige Werte hängen von Anlage, Brennstoff und geltenden Vorschriften ab."]
+]},
+co:{title:"CO · Kohlenmonoxid",tone:"red",items:[
+ ["⚙️","Entstehung","Entsteht bei unvollständiger Verbrennung, z. B. bei Sauerstoffmangel.","2C + O₂ → 2CO"],
+ ["☠️","Gesundheit","CO ist hochgiftig und ein wichtiges Warnsignal bei der Abgasanalyse."],
+ ["📏","Messhinweis","Der CO-Wert sollte möglichst niedrig sein; konkrete Anforderungen sind anlagenabhängig."]
+]},
+so2:{title:"SO₂ · Schwefeldioxid",tone:"gold",items:[
+ ["⚙️","Entstehung","Schwefelhaltige Brennstoffbestandteile reagieren mit Sauerstoff.","S + O₂ → SO₂"],
+ ["🌧️","Umwelt","Kann zur Luftverschmutzung und zu saurem Regen beitragen."],
+ ["📏","Hinweis","Bei schwefelarmen Brennstoffen geringer; Grenzwerte richten sich nach Brennstoff und Anlage."]
+]},
+russ:{title:"Ruß / Feinstaub",tone:"gray",items:[
+ ["⚙️","Entstehung","Tritt besonders bei unvollständiger Verbrennung und ungünstiger Brennstoff-Luft-Mischung auf."],
+ ["🫁","Gesundheit","Feine Partikel können die Atemwege belasten und sind gesundheitlich relevant."],
+ ["📏","Hinweis","Besonders bei Festbrennstoffen emissionskritisch; zulässige Staubwerte sind anlagenabhängig."]
+]}
+};
+const stage=document.getElementById("stage"),card=document.getElementById("hoverCard"),timer=document.getElementById("timer"),tv=document.getElementById("timerValue");
+let tid=null,remain=150,pinned=null;
+function draw(){tv.textContent=String(Math.floor(remain/60)).padStart(2,"0")+":"+String(remain%60).padStart(2,"0")}
+function startTimer(){clearInterval(tid);remain=150;timer.classList.remove("done");draw();tid=setInterval(()=>{remain--;draw();if(remain<=0){clearInterval(tid);timer.classList.add("done")}},1000)}
+function renderCard(btn){
+ const d=infos[btn.dataset.k]; if(!d)return;
+ card.innerHTML='<div class="hover-head '+d.tone+'">'+d.title+'</div><div class="hover-body">'+d.items.map(item=>'<div class="hover-item"><div class="hover-icon">'+item[0]+'</div><div><strong>'+item[1]+'</strong><span>'+item[2]+'</span>'+(item[3]?'<div class="hover-reaction">'+item[3]+'</div>':'')+'</div></div>').join('')+'</div>';
+ const sr=stage.getBoundingClientRect(),br=btn.getBoundingClientRect();
+ const cardW=Math.min(330,sr.width*.38);
+ let left=br.right-sr.left+12;
+ if(left+cardW>sr.width-10) left=br.left-sr.left-cardW-12;
+ let top=br.top-sr.top-8;
+ card.style.left=Math.max(8,left)+'px';
+ card.style.top=Math.max(8,top)+'px';
+ card.classList.add("show");
+ document.querySelectorAll(".hot").forEach(x=>x.classList.toggle("active",x===btn));
+}
+function hideCard(){if(pinned)return;card.classList.remove("show");document.querySelectorAll(".hot").forEach(x=>x.classList.remove("active"))}
+document.querySelectorAll(".hot").forEach(btn=>{
+ btn.addEventListener("mouseenter",()=>renderCard(btn));
+ btn.addEventListener("mouseleave",hideCard);
+ btn.addEventListener("focus",()=>renderCard(btn));
+ btn.addEventListener("blur",hideCard);
+ btn.addEventListener("click",e=>{
+   e.preventDefault();
+   pinned=pinned===btn?null:btn;
+   if(pinned){renderCard(btn);startTimer();}else{card.classList.remove("show");btn.classList.remove("active");}
+ });
+});
+stage.addEventListener("click",e=>{if(!e.target.closest(".hot")){pinned=null;card.classList.remove("show");document.querySelectorAll(".hot").forEach(x=>x.classList.remove("active"));}});
+draw();
+
+const hints=["Lies die Aufgabenstellung genau und markiere Gegeben/Gesucht.","Nutze die Fachbegriffe bzw. Formel aus dem vorherigen Schritt.","Prüfe Einheit, Größenordnung und fachliche Interpretation."];
+document.querySelectorAll(".task").forEach(task=>{let tries=0;const fb=task.querySelector(".feedback"),sol=task.querySelector(".solution"),check=task.querySelector(".check"),help=task.querySelector(".help"),sample=task.querySelector(".sample"),lad=[...task.querySelectorAll(".ladder span")];
+function ladder(ok=false){lad.forEach((x,i)=>{x.classList.toggle("done",ok||i<tries);x.classList.toggle("active",!ok&&i===Math.min(tries,2))})}
+if(check)check.onclick=()=>{tries++;const inputs=[...task.querySelectorAll("input[data-a]")],sels=[...task.querySelectorAll("select[data-correct]")];const okI=inputs.every(i=>{const v=Number(i.value.replace(",",".")),a=Number(i.dataset.a),t=Number(i.dataset.t||0);return Number.isFinite(v)&&Math.abs(v-a)<=t});const okS=sels.every(s=>s.value===s.dataset.correct);const ok=okI&&okS&&(inputs.length+sels.length>0);fb.className="feedback show "+(ok?"ok":"bad");fb.textContent=ok?"✓ Richtig. Vergleiche jetzt die Lösung.":"Noch nicht richtig. "+hints[Math.min(tries-1,2)];sol&&sol.classList.toggle("show",ok);ladder(ok)};
+if(help)help.onclick=()=>{tries++;fb.className="feedback show bad";fb.textContent="Hinweis: "+hints[Math.min(tries-1,2)];ladder(false)};
+if(sample)sample.onclick=()=>sol&&sol.classList.toggle("show");
+});
+</script>
+</body></html>

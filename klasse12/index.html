@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtuelles Klassenzimmer · Heizungstechnik</title>
+<style>
+:root{--navy:#0f3f67;--blue:#2e91c2;--blue-dark:#0e5b8d;--bg:#e9f1f5;--line:#b8cdd8;--ink:#17384f;--muted:#607787}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#edf4f7,#e4edf2);color:var(--ink)}
+a{color:inherit}
+.container{max-width:1300px;margin:auto;padding:0 18px}
+header{background:#fff;border-bottom:1px solid #d5e2e9;box-shadow:0 2px 8px rgba(24,57,76,.05)}
+.nav{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand-mark{font-size:1.55rem}
+.brand strong{display:block;color:#143e5b;font-size:1rem}
+.brand small{display:block;color:#6c8392;font-size:.77rem;margin-top:2px}
+.menu{display:flex;gap:5px;flex-wrap:wrap}
+.menu a{padding:8px 10px;border-radius:8px;text-decoration:none;color:#365d74;font-size:.84rem;font-weight:750}
+.menu a:hover,.menu a[aria-current="page"]{background:#e9f3f8;color:#12658f}
+
+main{padding:20px 0 28px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:12px}
+.eyebrow{font-size:.72rem;font-weight:850;letter-spacing:.11em;color:#287da7;text-transform:uppercase}
+.section-head h1{margin:4px 0 0;font-size:clamp(1.65rem,2.7vw,2.3rem);color:#17384f}
+.section-head p{margin:0;max-width:610px;color:#607787;line-height:1.5;font-size:.94rem}
+
+.classroom-shell{position:relative;border:1px solid #afc8d5;border-radius:18px;overflow:hidden;background:#d7e3e9;box-shadow:0 18px 42px rgba(22,57,77,.15)}
+.room{position:relative;line-height:0;background:#fff}
+.room>img{display:block;width:100%;height:auto}
+
+
+
+.hotspot-map{position:absolute;inset:0;width:100%;height:100%;z-index:4}
+.hotspot-map a{cursor:pointer;outline:none}
+.hotspot-map rect,.hotspot-map polygon,.hotspot-map image.hotspot-image{
+  fill:rgba(45,157,202,0);
+  stroke:rgba(255,255,255,0);
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+  transition:fill .16s ease,stroke .16s ease,filter .16s ease,opacity .16s ease
+}
+.hotspot-map a:hover rect,.hotspot-map a:focus-visible rect,
+.hotspot-map a:hover polygon,.hotspot-map a:focus-visible polygon{
+  fill:rgba(84,174,211,.035);
+  stroke:rgba(114,194,225,.28);
+  filter:drop-shadow(0 0 1px rgba(42,139,180,.12))
+}
+.hotspot-map a:hover image.hotspot-image,
+.hotspot-map a:focus-visible image.hotspot-image{
+  opacity:.055
+}
+.hotspot-map a:focus-visible{outline:none}
+
+.week-hover-info{
+  position:absolute;left:50%;bottom:29.5%;z-index:9;
+  width:min(420px,calc(100% - 28px));
+  transform:translateX(-50%) translateY(8px) scale(.992);
+  opacity:0;pointer-events:none;overflow:hidden;
+  background:linear-gradient(145deg,rgba(235,248,253,.985),rgba(221,241,249,.985));
+  color:#17384f;
+  border:1px solid rgba(105,174,204,.45);
+  border-radius:17px;padding:0;
+  box-shadow:0 12px 30px rgba(31,91,119,.15),0 1px 0 rgba(255,255,255,.88) inset;
+  transition:opacity .16s ease,transform .16s ease;
+  line-height:1.35
+}
+.week-hover-info.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.week-hover-top{
+  display:flex;align-items:center;gap:9px;
+  padding:10px 14px 9px;
+  background:linear-gradient(100deg,#d5eef8,#edf9fd);
+  border-bottom:1px solid rgba(105,174,204,.35);
+  color:#17384f
+}
+
+.week-hover-icon{
+  display:grid;
+  place-items:center;
+  width:38px;height:38px;flex:0 0 38px;
+  border-radius:10px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 2px 6px rgba(24,91,120,.12);
+  color:#0f5f91;
+  font-size:1.35rem;
+  line-height:1
+}
+.week-hover-copy{min-width:0}
+.week-hover-kicker{
+  display:block;margin-bottom:2px;
+  font-size:.66rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;
+  color:#4f8198
+}
+.week-hover-info strong{
+  display:block;color:#174f6c;margin:0;
+  font-size:.98rem;line-height:1.2
+}
+.week-hover-info ul{
+  margin:0;padding:11px 16px 8px;
+  list-style:none;color:#3f6577;font-size:.79rem
+}
+.week-hover-info li{position:relative;margin:4px 0;padding-left:19px}
+.week-hover-info li::before{
+  content:"✓";position:absolute;left:0;top:0;color:#1b87aa;font-weight:900
+}
+.week-hover-action{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:8px 15px 11px;
+  color:#17698e;font-size:.72rem;font-weight:850
+}
+.week-hover-action span:last-child{font-size:1rem}
+
+
+
+
+.helper-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:13px}
+.helper{background:#fff;border:1px solid #d3e0e7;border-radius:12px;padding:12px 14px;text-decoration:none;box-shadow:0 3px 10px rgba(23,56,79,.05)}
+.helper strong{display:block;color:#173f59;margin-bottom:3px;font-size:.92rem}
+.helper span{font-size:.81rem;color:#657d8c;line-height:1.35}
+
+footer{padding:20px 0;color:#6f8390;font-size:.82rem}
+
+@media(max-width:760px){
+  .container{padding:0 10px}
+  .nav{align-items:flex-start;flex-direction:column;padding:9px 0}
+  .menu a{font-size:.76rem;padding:6px 7px}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .helper-row{grid-template-columns:1fr}
+  main{padding-top:15px}
+  .classroom-shell{border-radius:13px}
+  .journey-link{top:7px;right:7px;font-size:.67rem;padding:7px 9px}
+  .week-hover-info{display:none}
+}
+
+
+.learning-dialog{width:min(980px,94vw);max-height:92vh;border:0;border-radius:20px;padding:0;box-shadow:0 28px 70px rgba(6,31,48,.45);color:#17384f}
+.learning-dialog::backdrop{background:rgba(7,31,47,.72);backdrop-filter:blur(3px)}
+.learning-dialog-inner{padding:18px;background:#eef5f8}
+.learning-dialog-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px}
+.learning-dialog-head h2{margin:0;color:#143e5b;font-size:clamp(1.25rem,3vw,1.8rem)}
+.learning-dialog-head p{margin:5px 0 0;color:#607787;font-size:.9rem}
+.dialog-close{border:0;border-radius:999px;width:38px;height:38px;background:#fff;color:#174967;font-size:1.35rem;font-weight:900;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.learning-overview{display:grid;grid-template-columns:minmax(180px,31%) 1fr;gap:18px;align-items:start}
+.learning-overview-poster{background:#fff;border-radius:14px;padding:8px;box-shadow:0 7px 18px rgba(20,61,85,.12)}
+.learning-overview-poster img{display:block;width:100%;height:auto;border-radius:9px}
+.week-map-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.week-map-btn{display:flex;align-items:center;gap:10px;min-height:70px;padding:10px 12px;background:#fff;border:1px solid #cfe0e8;border-radius:12px;text-decoration:none;box-shadow:0 3px 10px rgba(23,56,79,.06);transition:.14s}
+.week-map-btn:hover,.week-map-btn:focus-visible{transform:translateY(-2px);border-color:#2e91c2;box-shadow:0 7px 18px rgba(23,56,79,.14);outline:none}
+.week-map-no{display:grid;place-items:center;flex:0 0 36px;height:36px;border-radius:50%;background:#0f6f9f;color:#fff;font-weight:900}
+.week-map-btn strong{display:block;color:#173f59;font-size:.88rem}
+.week-map-btn small{display:block;color:#687f8d;margin-top:2px;font-size:.73rem}
+@media(max-width:760px){
+ .learning-overview{grid-template-columns:1fr}.learning-overview-poster{display:none}.week-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:440px){.week-map-grid{grid-template-columns:1fr}}
+
+
+.learning-dialog-head{border-bottom:1px solid #c9dfe9;padding-bottom:12px}
+.week-map-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.week-map-btn{position:relative;overflow:hidden;background:#f8fcfe}
+.week-map-btn::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(148,211,236,.13));pointer-events:none
+}
+.week-map-btn:hover{background:#eaf6fc}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">🔥</span>
+      <span><strong>Lernwerkstatt Heizungstechnik</strong><small>Digitales Klassenzimmer</small></span>
+    </a>
+    <nav class="menu">
+      <a href="index.html" aria-current="page">Startseite</a>
+      <a href="lernpfad.html">Lernpfad</a>
+      <a href="lernorte.html">Links & Lernorte</a>
+      <a href="aktuelles.html">Aktuelles</a>
+      <a href="jahresreise-karte.html">Jahresreise</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Dein digitaler Fachraum</div>
+        <h1>Virtuelles Klassenzimmer Heizungstechnik</h1>
+      </div>
+      <p>Klicke direkt auf eine Blockwoche im Bild. Beim Darüberfahren siehst du die wichtigsten Inhalte der Woche.</p>
+    </div>
+
+    <div class="classroom-shell">
+      <div class="room">
+        <img src="startbild-heizungstechnik-neu.png?v=20261025-1500" alt="Virtuelles Klassenzimmer Heizungstechnik mit integrierter Lernlandkarte, Jahresreise und zwölf Blockwochen">
+        <svg class="hotspot-map" viewBox="0 0 1536 1024" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-label="Anklickbare Bereiche im virtuellen Klassenzimmer">
+          <!-- Lernlandkarte: exakt das sichtbare Poster als Klickfläche -->
+          <a href="#" class="learningmap-hotspot" aria-label="Lernlandkarte Heizungstechnik öffnen">
+            <image class="hotspot-image" href="startbild-heizungstechnik-neu.png?v=20261025-1500"
+              x="176" y="103" width="404" height="346"
+              preserveAspectRatio="none" opacity="0.001"/>
+          </a>
+
+          <!-- Jahresreise: exakt das sichtbare Bild als Klickfläche -->
+          <a href="jahresreise-karte.html" aria-label="Jahresreise öffnen">
+            <image class="hotspot-image" href="startbild-heizungstechnik-neu.png?v=20261025-1500"
+              x="1166" y="95" width="326" height="288"
+              preserveAspectRatio="none" opacity="0.001"/>
+          </a>
+
+          <!-- Blockwochen: nur die sichtbaren Karten bleiben interaktiv -->
+          <a href="lernpfad.html?bw=1" class="week-hotspot" data-icon-x="-31" data-title="BW 1 · Brennstoffe" data-info="Öl, Gas, Holz und Pellets|Brennstoffeigenschaften|Einsatz und Auswahl" aria-label="Blockwoche 1 öffnen"><rect x="18" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=2" class="week-hotspot" data-icon-x="-155" data-title="BW 2 · Verbrennung" data-info="Heizwert und Brennwert|Energieinhalt|Verbrennung und Emissionen" aria-label="Blockwoche 2 öffnen"><rect x="142" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=3" class="week-hotspot" data-icon-x="-279" data-title="BW 3 · Heizöllagerung" data-info="Tankarten und Aufbau|Befüllung und Entlüftung|Sicherheit und Schutzmaßnahmen" aria-label="Blockwoche 3 öffnen"><rect x="266" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=4" class="week-hotspot" data-icon-x="-403" data-title="BW 4 · Festbrennstofflager" data-info="Pellets, Scheitholz und Hackschnitzel|Lagerbedingungen|Austragung und Sicherheit" aria-label="Blockwoche 4 öffnen"><rect x="390" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=5" class="week-hotspot" data-icon-x="-527" data-title="BW 5 · Abgassysteme I" data-info="Aufgabe und Arten von Abgassystemen|Naturzug, Förderdruck und Druckverluste|Werkstoffe und Querschnitt" aria-label="Blockwoche 5 öffnen"><rect x="514" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=6" class="week-hotspot" data-icon-x="-651" data-title="BW 6 · Abgassysteme II" data-info="Feuchtebetrieb und Kondensat|Brandschutz und Abstände|Verbrennungsluft und Anlagenplanung" aria-label="Blockwoche 6 öffnen"><rect x="638" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=7" class="week-hotspot" data-icon-x="-775" data-title="BW 7 · Abgasmessung" data-info="Messgrößen und Messgerät|Messung durchführen|Messwerte auswerten und Störungen erkennen" aria-label="Blockwoche 7 öffnen"><rect x="762" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=8" class="week-hotspot" data-icon-x="-899" data-title="BW 8 · Wärmepumpe I" data-info="Grundprinzip und Kältekreislauf|Hauptbauteile und Leistungszahl|Eignungsprüfung eines Gebäudes" aria-label="Blockwoche 8 öffnen"><rect x="886" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=9" class="week-hotspot" data-icon-x="-1023" data-title="BW 9 · Wärmepumpe II" data-info="Luft als Wärmequelle|Erdreich als Wärmequelle|Grundwasser und Wärmequellenvergleich" aria-label="Blockwoche 9 öffnen"><rect x="1010" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=10" class="week-hotspot" data-icon-x="-1147" data-title="BW 10 · Wärmepumpe III" data-info="Betriebsweisen|Hydraulische Einbindung|Warmwasserbereitung und Systemplanung" aria-label="Blockwoche 10 öffnen"><rect x="1134" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=11" class="week-hotspot" data-icon-x="-1271" data-title="BW 11 · Wärmepumpe IV" data-info="COP, SCOP und Jahresarbeitszahl|Betriebskosten und Umweltwirkung|Fehlersuche und Optimierung" aria-label="Blockwoche 11 öffnen"><rect x="1258" y="712" width="119" height="232" rx="10"/></a>
+          <a href="lernpfad.html?bw=12" class="week-hotspot" data-icon-x="-1395" data-title="BW 12 · Projekt & Abschluss" data-info="Wärmepumpenanlage auslegen|System auswählen und Kunden beraten|Inbetriebnahme, Übergabe und Abschluss" aria-label="Blockwoche 12 öffnen"><rect x="1382" y="712" width="136" height="232" rx="10"/></a>
+        </svg>
+
+        <div id="weekHoverInfo" class="week-hover-info" aria-live="polite">
+          <div class="week-hover-top">
+            <span id="weekHoverIcon" class="week-hover-icon" aria-hidden="true"></span>
+            <div class="week-hover-copy">
+              <span class="week-hover-kicker">Blockwoche · Lernpfad</span>
+              <strong id="weekHoverTitle"></strong>
+            </div>
+          </div>
+          <ul id="weekHoverList"></ul>
+          <div class="week-hover-action"><span>Zum Lernpfad klicken</span><span>→</span></div>
+        </div>
+      </div>
+    </div>
+
+    <dialog id="learningMapDialog" class="learning-dialog">
+      <div class="learning-dialog-inner">
+        <div class="learning-dialog-head">
+          <div>
+            <h2>Lernlandkarte Heizungstechnik · 12. Klasse</h2>
+            <p>Wähle eine Blockwoche. Die passende Lernlandkarte öffnet sich direkt.</p>
+          </div>
+          <button class="dialog-close" id="closeLearningMap" type="button" aria-label="Fenster schließen">×</button>
+        </div>
+        <div class="learning-overview">
+          <div class="learning-overview-poster"><img src="lernlandkarte-startseite.svg?v=20261025-1115" alt="Übersicht der 12 Blockwochen"></div>
+          <div class="week-map-grid">
+            <a class="week-map-btn" href="lernlandkarte-bw1.png" target="_blank"><span class="week-map-no">1</span><span><strong>BW 1 · Brennstoffe</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw2.png" target="_blank"><span class="week-map-no">2</span><span><strong>BW 2 · Verbrennung</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw3.png" target="_blank"><span class="week-map-no">3</span><span><strong>BW 3 · Heizöllagerung</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw4.png" target="_blank"><span class="week-map-no">4</span><span><strong>BW 4 · Festbrennstofflager</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw5.png" target="_blank"><span class="week-map-no">5</span><span><strong>BW 5 · Abgassysteme I</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw6.png" target="_blank"><span class="week-map-no">6</span><span><strong>BW 6 · Abgassysteme II</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw7.png" target="_blank"><span class="week-map-no">7</span><span><strong>BW 7 · Abgasmessung</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw8.png" target="_blank"><span class="week-map-no">8</span><span><strong>BW 8 · Wärmepumpe I</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw9.png" target="_blank"><span class="week-map-no">9</span><span><strong>BW 9 · Wärmepumpe II</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw10.png" target="_blank"><span class="week-map-no">10</span><span><strong>BW 10 · Wärmepumpe III</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw11.png" target="_blank"><span class="week-map-no">11</span><span><strong>BW 11 · Wärmepumpe IV</strong><small>Lernlandkarte öffnen</small></span></a>
+            <a class="week-map-btn" href="lernlandkarte-bw12.png" target="_blank"><span class="week-map-no">12</span><span><strong>BW 12 · Projekt & Abschluss</strong><small>Lernlandkarte öffnen</small></span></a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="helper-row">
+      <a class="helper" href="lernpfad.html"><strong>📚 Lernpfad</strong><span>Alle Blockwochen und Lerneinheiten im Überblick.</span></a>
+      <a class="helper" href="lernhilfe.html"><strong>📖 Lernhilfe SHK</strong><span>Mit Bildern, einfachen Erklärungen und Rechenhilfen lernen.</span></a>
+      <a class="helper" href="jahresreise-karte.html"><strong>🗺️ Jahresreise</strong><span>Der Jahresfahrplan über alle zwölf Blockwochen.</span></a>
+    </div>
+  </div>
+</main>
+
+<footer><div class="container">Lernwerkstatt Heizungstechnik</div></footer>
+
+<script>
+(function(){
+  const info=document.getElementById('weekHoverInfo');
+  const title=document.getElementById('weekHoverTitle');
+  const list=document.getElementById('weekHoverList');
+  const icon=document.getElementById('weekHoverIcon');
+
+  function show(el){
+    title.textContent=el.dataset.title||'Blockwoche';
+    if(icon){
+      icon.textContent=el.dataset.icon||'📘';
+    }
+    list.innerHTML=(el.dataset.info||'').split('|').filter(Boolean).map(x=>'<li>'+x+'</li>').join('');
+    info.classList.add('show');
+  }
+  function hide(){info.classList.remove('show')}
+
+  document.querySelectorAll('.week-hotspot').forEach(el=>{
+    el.addEventListener('mouseenter',()=>show(el));
+    el.addEventListener('mouseleave',hide);
+    el.addEventListener('focus',()=>show(el));
+    el.addEventListener('blur',hide);
+  });
+})();
+</script>
+<script>
+(function(){
+  const dlg=document.getElementById('learningMapDialog');
+  const openBtns=[...document.querySelectorAll('.learningmap-hotspot,.learningmap-card')];
+  const closeBtn=document.getElementById('closeLearningMap');
+  if(dlg && openBtns.length && closeBtn){
+    openBtns.forEach(openBtn=>openBtn.addEventListener('click',e=>{e.preventDefault();dlg.showModal();}));
+    closeBtn.addEventListener('click',()=>dlg.close());
+    dlg.addEventListener('click',e=>{if(e.target===dlg) dlg.close();});
+  }
+})();
+</script>
+</body>
+</html>
