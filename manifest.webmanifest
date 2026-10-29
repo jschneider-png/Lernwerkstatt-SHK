@@ -1,14 +1,14 @@
 {
-  "id": "/Lernwerkstatt-Sanit-rtechnik-11/",
-  "name": "Lernwerkstatt Sanitärtechnik 11",
+  "id": "/Lernwerkstatt-SHK/",
+  "name": "Lernwerkstatt SHK",
   "short_name": "Lernwerkstatt SHK",
-  "description": "Interaktive Lernwerkstatt für Sanitärtechnik",
+  "description": "Digitale Lernwerkstatt für Anlagenmechanikerinnen und Anlagenmechaniker SHK am Beruflichen Schulzentrum Fürth",
   "lang": "de",
-  "start_url": "/Lernwerkstatt-Sanit-rtechnik-11/",
-  "scope": "/Lernwerkstatt-Sanit-rtechnik-11/",
+  "start_url": "/Lernwerkstatt-SHK/",
+  "scope": "/Lernwerkstatt-SHK/",
   "display": "standalone",
   "background_color": "#f5f8fb",
-  "theme_color": "#0e3450",
+  "theme_color": "#10477f",
   "icons": [
     {
       "src": "icon-192.png",
