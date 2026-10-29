@@ -1,0 +1,6 @@
+BW01 – Aufgabenvielfalt
+
+Ersetze im Hauptverzeichnis deines GitHub-Repositories ausschließlich die Datei bw01-interaktiv.html.
+Die vorhandene wiederholung.html leitet BW01 bereits auf diese Datei weiter.
+Enthalten: 16 Aufgaben, 4 Stationen, Multiple Choice, Mehrfachauswahl, Zuordnung per Klick, Kurzantwort, Reihenfolge und anklickbares Wasserkreislauf-Bild.
+Die Übungen laufen direkt im Browser; es sind keine nativen H5P-Dateien. Ergebnisse werden nicht an mebis übertragen.
