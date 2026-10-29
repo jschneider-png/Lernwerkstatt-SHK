@@ -1,88 +1,29 @@
 <!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#103e63">
-<meta name="description" content="Lernwerkstatt SHK – digitales Klassenzimmer für Sanitär- und Heizungstechnik">
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lernwerkstatt – Fachbereich Metall</title><meta name="theme-color" content="#10477f"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Lernwerkstatt SHK">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>Lernwerkstatt SHK · Fachbereich Metall</title>
 <style>
-:root{color-scheme:light;--navy:#0c304c;--blue:#155989;--ink:#142d41;--muted:#526b7b;--paper:#f1f6f8;--radius:22px}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
-a{color:inherit}
-.page{max-width:1080px;margin:auto;padding:clamp(14px,3vw,32px);padding-bottom:calc(26px + env(safe-area-inset-bottom))}
-.hero{position:relative;overflow:hidden;border-radius:var(--radius);padding:clamp(24px,5vw,52px);color:white;background:linear-gradient(115deg,rgba(8,38,62,.97),rgba(17,81,119,.89)),radial-gradient(circle at 80% 10%,#d8a366,#123e60 65%);box-shadow:0 12px 34px #12364e23}
-.hero:after{content:"";position:absolute;right:-55px;bottom:-105px;width:320px;height:320px;border:2px solid #ffffff20;border-radius:50%;box-shadow:0 0 0 34px #ffffff08,0 0 0 72px #ffffff06;pointer-events:none}
-.eyebrow{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800;color:#b5d9e9}
-.hero h1{position:relative;z-index:1;margin:12px 0 5px;font-size:clamp(2.2rem,7vw,4.5rem);line-height:1.02;letter-spacing:-.045em}
-.hero p{position:relative;z-index:1;margin:8px 0 0;color:#e0edf5;font-size:clamp(.95rem,2.2vw,1.2rem)}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.tags span{background:#ffffff19;border:1px solid #ffffff30;border-radius:999px;padding:7px 12px;font-size:.8rem;font-weight:650}
-.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:28px 2px 14px}
-.section-title h2{margin:0;font-size:clamp(1.2rem,3vw,1.65rem)}
-.section-title small{color:var(--muted)}
-.classes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2vw,20px)}
-.class{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:clamp(190px,31vw,290px);overflow:hidden;padding:clamp(18px,3vw,30px);border-radius:var(--radius);text-decoration:none;color:white;box-shadow:0 9px 22px #173b5220;isolation:isolate;transition:transform .16s ease,box-shadow .16s ease}
-.class:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 87% 22%,#ffffff2b,transparent 37%)}
-.class.active:hover{transform:translateY(-3px);box-shadow:0 14px 28px #173b5238}
-.class.active:active{transform:scale(.985)}
-.class:focus-visible{outline:4px solid #ffbb49;outline-offset:3px}
-.class10{background:linear-gradient(145deg,#33495c,#1c3043)}
-.class11{background:linear-gradient(145deg,#2379ba,#0b416e)}
-.class12{background:linear-gradient(145deg,#e78b3d,#a94c16)}
-.class13{background:linear-gradient(145deg,#3d8d72,#15533d)}
-.class .top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.class .symbol{font-size:clamp(2.5rem,6vw,4.3rem);line-height:1;filter:drop-shadow(0 5px 6px #0002)}
-.status{border:1px solid #ffffff52;background:#0000002d;border-radius:999px;padding:6px 10px;font-size:.7rem;font-weight:800;white-space:nowrap}
-.class h3{font-size:clamp(1.5rem,4vw,2.45rem);letter-spacing:-.03em;line-height:1.1;margin:18px 0 4px}
-.class p{margin:0;color:#ffffffdd;font-size:clamp(.82rem,2vw,1rem)}
-.class .action{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-weight:800;font-size:.85rem}
-.class.inactive{cursor:default}
-.class.inactive .action{opacity:.8}
-.infos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.info{background:white;border:1px solid #dbe7ed;border-radius:18px;padding:clamp(14px,2.5vw,22px);min-height:116px;box-shadow:0 4px 12px #193c4d0c}
-.info .ico{font-size:1.8rem}
-.info h3{font-size:1rem;margin:8px 0 5px}
-.info p{font-size:.83rem;line-height:1.4;color:var(--muted);margin:0}
-footer{padding:25px 4px 0;text-align:center;color:var(--muted);font-size:.78rem}
-@media(max-width:540px){.page{padding:10px 10px calc(20px + env(safe-area-inset-bottom))}.hero{border-radius:16px;padding:25px 19px}.tags{margin-top:17px}.tags span{font-size:.7rem;padding:6px 9px}.section-title{margin:23px 3px 12px}.classes{gap:10px}.class{border-radius:16px;min-height:205px;padding:15px}.class h3{font-size:1.55rem}.class p{font-size:.8rem}.class .symbol{font-size:2.65rem}.status{font-size:.63rem;padding:5px 7px}.infos{grid-template-columns:1fr}.info{min-height:auto;display:grid;grid-template-columns:35px 1fr;column-gap:10px;align-items:start}.info .ico{grid-row:span 2}.info h3{margin:0 0 3px}}
-@media(max-width:360px){.class{min-height:195px;padding:12px}.class h3{font-size:1.3rem}.class .symbol{font-size:2.1rem}.class .action{font-size:.75rem}}
-@media(prefers-reduced-motion:reduce){.class{transition:none}}
-</style>
-</head>
-<body>
-<main class="page" id="start">
-<header class="hero">
-<div class="eyebrow">Berufliches Schulzentrum Fürth · Fachbereich Metall</div>
-<h1>Lernwerkstatt<br>SHK</h1>
-<p>Dein digitales Klassenzimmer für Sanitär-, Heizungs- und Klimatechnik.</p>
-<div class="tags"><span>💧 Sanitär</span><span>♨️ Heizung</span><span>🌬️ Klima</span><span>🔧 Montage</span></div>
-</header>
-<section aria-labelledby="klassen">
-<div class="section-title"><h2 id="klassen">Deine Klassenräume</h2><small>Klasse auswählen</small></div>
-<div class="classes">
-<div class="class class10 inactive" aria-label="Klasse 10, noch nicht verfügbar"><div class="top"><span class="symbol" aria-hidden="true">🧰</span><span class="status">Inaktiv</span></div><div><h3>Klasse 10</h3><p>Grundlagen SHK</p><span class="action">In Vorbereitung</span></div></div>
-<a class="class class11 active" href="klasse11.html" aria-label="Klasse 11 Sanitärtechnik öffnen"><div class="top"><span class="symbol" aria-hidden="true">🚰</span></div><div><h3>Klasse 11</h3><p>Sanitärtechnik</p><span class="action">Klassenzimmer öffnen →</span></div></a>
-<a class="class class12 active" href="klasse12/index.html" aria-label="Klasse 12 Heizungstechnik öffnen"><div class="top"><span class="symbol" aria-hidden="true">♨️</span></div><div><h3>Klasse 12</h3><p>Heizungstechnik</p><span class="action">Klassenzimmer öffnen →</span></div></a>
-<div class="class class13 inactive" aria-label="Klasse 13, noch nicht verfügbar"><div class="top"><span class="symbol" aria-hidden="true">🌬️</span><span class="status">Inaktiv</span></div><div><h3>Klasse 13</h3><p>Vertiefung SHK</p><span class="action">In Vorbereitung</span></div></div>
-</div>
-</section>
-<section aria-labelledby="informationen">
-<div class="section-title"><h2 id="informationen">Aktuelle Informationen</h2></div>
-<div class="infos">
-<div class="info"><span class="ico" aria-hidden="true">📅</span><h3>Termine</h3><p>Wichtige Termine erfährst du im Unterricht.</p></div>
-<div class="info"><span class="ico" aria-hidden="true">📌</span><h3>Hinweise</h3><p>Aktuelle Hinweise zu deiner Lernwerkstatt.</p></div>
-<div class="info"><span class="ico" aria-hidden="true">👩‍🏫</span><h3>Ansprechpartner</h3><p>Bei Fragen hilft dir deine Lehrkraft weiter.</p></div>
-</div>
-</section>
-<footer>Lernwerkstatt SHK · Fachbereich Metall · BSZ Fürth</footer>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#fff;font-family:system-ui,sans-serif}
+.screen{width:min(100%,1024px);margin:0 auto;position:relative;line-height:0;min-height:100svh}
+.screen>img{width:100%;height:auto;display:block}
+.hit{position:absolute;display:block;border-radius:12px;z-index:2;outline-offset:3px;-webkit-tap-highlight-color:rgba(255,255,255,.15)}
+.hit:focus-visible{outline:4px solid #0b5597}
+.class11{left:51.2%;top:39.9%;width:45.8%;height:17.7%;background:transparent;border:0}
+.class12{left:3.2%;top:58.4%;width:45.8%;height:18.1%}
+.home{left:90%;top:0;width:10%;height:7%}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.old-nav{display:none!important}
+@media(max-width:1024px){.screen{width:100%;max-width:none}}
+@media(min-width:1025px){.screen{box-shadow:0 12px 48px #0d365024}}
+</style></head><body>
+<main class="screen" id="start">
+<img src="startseite-vorlage.png?v=71ca477844669cf4" alt="Lernwerkstatt Fachbereich Metall: Klassen 10, 11, 12, 13 und allgemeine Informationen. Klassen 11 Sanitärtechnik und 12 Heizungstechnik sind aktiv." fetchpriority="high">
+<a class="hit class11" href="klasse11.html" aria-label="Klasse 11: digitales Klassenzimmer Sanitärtechnik öffnen"><span class="sr-only">Klasse 11 Sanitärtechnik öffnen</span></a>
+<a class="hit class12" href="klasse12/index.html" aria-label="Klasse 12: digitales Klassenzimmer Heizungstechnik öffnen"><span class="sr-only">Klasse 12 öffnen</span></a>
+<a class="hit home" href="#start" aria-label="Zur Startseite"><span class="sr-only">Startseite</span></a>
 </main>
-</body>
-</html>
+<!-- Bestehendes Klassenzimmer Klasse 11 unverändert unter klasse11.html; die alten Lernpfade und Materialien bleiben im Projekt. -->
+<!-- Die frühere mobile Navigation bleibt im gesicherten Klasse-11-Code und kann bei Bedarf reaktiviert werden. -->
+</body></html>
