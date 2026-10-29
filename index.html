@@ -29,4 +29,30 @@
 </main>
 <!-- Bestehendes Klassenzimmer Klasse 11 unverändert unter klasse11.html; die alten Lernpfade und Materialien bleiben im Projekt. -->
 <!-- Die frühere mobile Navigation bleibt im gesicherten Klasse-11-Code und kann bei Bedarf reaktiviert werden. -->
+<script>
+/* Aktualisierung für installierte iPhone-/Android-Web-Apps, ohne Neuinstallation. */
+(function(){
+  const CURRENT='20261029-2';
+  let checking=false;
+  async function checkForUpdates(){
+    if(checking || document.visibilityState==='hidden' || !navigator.onLine)return;
+    checking=true;
+    try{
+      const response=await fetch('./app-version.json?check='+Date.now(),{cache:'no-store'});
+      if(!response.ok)return;
+      const data=await response.json();
+      if(typeof data.version==='string' && /^[a-zA-Z0-9._-]{1,60}$/.test(data.version) && data.version!==CURRENT){
+        const url=new URL('./',location.href);
+        url.searchParams.set('app-version',data.version);
+        location.replace(url.href);
+      }
+    }catch(e){/* offline: aktuelle Seite weiterhin anzeigen */}
+    finally{checking=false}
+  }
+  window.addEventListener('pageshow',checkForUpdates);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')checkForUpdates()});
+  window.addEventListener('online',checkForUpdates);
+  setInterval(function(){if(document.visibilityState==='visible')checkForUpdates()},300000);
+})();
+</script>
 </body></html>
