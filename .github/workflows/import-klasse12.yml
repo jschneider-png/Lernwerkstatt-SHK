@@ -1,0 +1,38 @@
+name: Klasse 12 Heizungstechnik integrieren
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-klasse12:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hauptprojekt auschecken
+        uses: actions/checkout@v4
+      - name: Heizungstechnik vollständig in klasse12 übernehmen
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 'https://github.com/jschneider-png/digitales-Klassenzimmer-Heizungstechnik/archive/refs/heads/main.zip' -o /tmp/klasse12.zip
+          unzip -q /tmp/klasse12.zip -d /tmp
+          mkdir -p klasse12
+          cp -a /tmp/digitales-Klassenzimmer-Heizungstechnik-main/. klasse12/
+          rm -rf klasse12/.github
+          test -s klasse12/index.html
+          test -s klasse12/lernpfad.html
+          test -s klasse12/klassenzimmer.png
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='https://jschneider-png.github.io/digitales-Klassenzimmer-Heizungstechnik/'
+          assert old in s, 'Klasse-12-Link nicht gefunden'
+          p.write_text(s.replace(old,'klasse12/index.html'))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add klasse12 index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Klasse 12 Heizungstechnik in Lernwerkstatt SHK integrieren'
+            git push
+          fi
