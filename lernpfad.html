@@ -797,7 +797,7 @@ function render(){
          (i===2?'<a class="btn primary" href="wassertechnik/ph-lernkontrolle.html">✅ Lernkontrolle pH-Wert · 15 Aufgaben →</a><a class="btn secondary" href="https://lernplattform.bycs.de/mod/hvp/view.php?id=103076795" target="_blank" rel="noopener noreferrer">✅ Lernkontrolle die Zweite →</a>':'')+
          (i===3?'<a class="btn secondary" href="https://lernplattform.bycs.de/mod/folder/view.php?id=104266058" target="_blank" rel="noopener noreferrer">📄 Arbeitsblätter öffnen →</a>':'<span class="btn placeholder-btn" aria-disabled="true">Arbeitsblätter · Link folgt</span>')+
          '<span class="btn placeholder-btn" aria-disabled="true">Zusatzmaterial · Link folgt</span>'+
-         (w.nr<=2 ? '<a class="btn" style="background:#fbd66a;color:#18364b;font-weight:850" href="stundencheck.html?klasse=11&bw='+w.nr+'&stunde='+(i+1)+'">🏅 Stunden-Check · Abzeichen →</a>' : '')+
+         
          materialBtn+
        '</div></article>';
    }
@@ -808,7 +808,7 @@ function render(){
      '<div class="hour-actions">'+
        (w.nr===2 ? '<a class="btn primary" href="praesentation-bw2.html?stunde='+(i+1)+'">📽️ Präsentation öffnen →</a>' : '')+
        (w.nr===2 && i===3 ? '<a class="btn secondary" href="lernlabor/trinkwasserbehandlung.html?v=5">Lerneinheit öffnen →</a>' : w.nr===2 && i===1 ? '<a class="btn secondary" href="wassertechnik/wasserhaerte.html">Lerneinheit öffnen →</a>' : w.nr===2 && i===2 ? '<a class="btn secondary" href="wassertechnik/ph-wert.html">Lerneinheit öffnen →</a>' : '<button class="btn secondary unit" data-i="'+i+'">Lerneinheit öffnen →</button>')+
-       (w.nr<=2 ? '<a class="btn" style="background:#fbd66a;color:#18364b;font-weight:850" href="stundencheck.html?klasse=11&bw='+w.nr+'&stunde='+(i+1)+'">🏅 Stunden-Check · Abzeichen →</a>' : '')+
+       
        (!(w.nr===2 && (i===1 || i===2)) ? '<a class="btn material-page-btn" href="'+materialUrl+'">'+(w.nr===2 && i===3?'Materialien →':'Mebis & Materialien →')+'</a>' : '')+
      '</div>'+
    '</article>';
