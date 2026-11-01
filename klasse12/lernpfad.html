@@ -1346,4 +1346,4 @@ overlay.querySelector('#bw1-map-exercises').onclick=()=>{const i=hour;close();op
 function addButtons(){if(typeof active==='undefined'||active!==1)return;document.querySelectorAll('#topicGrid .topic-card').forEach((card,i)=>{if(i>3||card.querySelector('.bw1-map-btn'))return;const b=document.createElement('button');b.type='button';b.className='btn outline bw1-map-btn';b.style.cssText='width:100%;margin-top:8px';b.textContent='🗺 Lernlandkarte';b.onclick=()=>open(i+1);const unit=card.querySelector('.open-unit');if(unit)unit.insertAdjacentElement('afterend',b);else card.appendChild(b);});}
 if(typeof renderContent==='function'){const original=renderContent;renderContent=function(){original();addButtons();};addButtons();}
 })();
-</script></body></html>
+</script><script defer src="../shk-navigation.js"></script></body></html>
