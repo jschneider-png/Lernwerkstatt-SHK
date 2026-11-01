@@ -58,4 +58,4 @@ function render(){
  if(r&&!form)r.onclick=()=>{document.getElementById('answer').hidden=false;r.setAttribute('aria-expanded','true');r.hidden=true};
 }
 prev.onclick=()=>{if(i){i--;render()}};next.onclick=()=>{i=i===slides.length-1?0:i+1;render()};render();
-</script></body></html>
+</script><script defer src="../shk-navigation.js"></script></body></html>
